@@ -309,6 +309,10 @@ var StylerJS = /*#__PURE__*/function () {
 
     this.options = options;
     this.panel = new _StylerPanel__WEBPACK_IMPORTED_MODULE_1__["StylerPanel"]();
+    this.classes = {
+      hover: 'sjs-element-hover',
+      focus: 'sjs-element-focus'
+    };
   }
   /**
    * Get the elements based on the options selector.
@@ -364,37 +368,6 @@ var StylerJS = /*#__PURE__*/function () {
       });
     }
     /**
-     * Deselect all elements.
-     * 
-     * @param  any elm
-     * @return void
-     */
-
-  }, {
-    key: "deselectElement",
-    value: function deselectElement(elm) {
-      var elements = document.querySelectorAll('.sjs-element-focus');
-
-      if (elements.length) {
-        var _iterator = _createForOfIteratorHelper(elements),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var element = _step.value;
-
-            if (elm !== element) {
-              _helpers__WEBPACK_IMPORTED_MODULE_2__["default"].removeClass(element, 'sjs-element-focus');
-            }
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-      }
-    }
-    /**
      * Gather all information about selector elements and corresponding styles.
      * 
      * @return void
@@ -405,20 +378,20 @@ var StylerJS = /*#__PURE__*/function () {
     value: function setElementEvents() {
       var _this2 = this;
 
-      var _iterator2 = _createForOfIteratorHelper(this.elements),
-          _step2;
+      var _iterator = _createForOfIteratorHelper(this.elements),
+          _step;
 
       try {
         var _loop = function _loop() {
-          var element = _step2.value;
+          var element = _step.value;
           element.addEventListener('mouseenter', function () {
-            if (!element.classList.contains('sjs-element-focus')) {
-              element.classList.add('sjs-element-hover');
+            if (!element.classList.contains(_this2.classes.focus)) {
+              element.classList.add(_this2.classes.hover);
             }
           });
           element.addEventListener('mouseleave', function () {
-            if (element.classList.contains('sjs-element-hover')) {
-              _helpers__WEBPACK_IMPORTED_MODULE_2__["default"].removeClass(element, 'sjs-element-hover');
+            if (element.classList.contains(_this2.classes.hover)) {
+              _helpers__WEBPACK_IMPORTED_MODULE_2__["default"].removeClass(element, _this2.classes.hover);
             }
           });
           element.addEventListener('click', function (e) {
@@ -428,8 +401,8 @@ var StylerJS = /*#__PURE__*/function () {
             _this2.deselectElement(element); // then visually select the element
 
 
-            element.classList.remove('sjs-element-hover');
-            element.classList.add('sjs-element-focus'); // finally destroy and build the style panel
+            element.classList.remove(_this2.classes.hover);
+            element.classList.add(_this2.classes.focus); // finally destroy and build the style panel
 
             _this2.panel.destroy();
 
@@ -437,13 +410,44 @@ var StylerJS = /*#__PURE__*/function () {
           });
         };
 
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
           _loop();
         }
       } catch (err) {
-        _iterator2.e(err);
+        _iterator.e(err);
       } finally {
-        _iterator2.f();
+        _iterator.f();
+      }
+    }
+    /**
+    * Deselect all elements.
+    * 
+    * @param  any elm
+    * @return void
+    */
+
+  }, {
+    key: "deselectElement",
+    value: function deselectElement(elm) {
+      var elements = document.querySelectorAll(".".concat(this.classes.focus));
+
+      if (elements.length) {
+        var _iterator2 = _createForOfIteratorHelper(elements),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var element = _step2.value;
+
+            if (elm !== element) {
+              _helpers__WEBPACK_IMPORTED_MODULE_2__["default"].removeClass(element, this.classes.focus);
+            }
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
       }
     }
     /**

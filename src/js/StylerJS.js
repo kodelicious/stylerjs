@@ -2,8 +2,6 @@ import allowedProperties from './allowed-properties'
 import { StylerPanel } from './StylerPanel'
 import helpers from './helpers'
 
-
-
 export class StylerJS
 {
     /**
@@ -15,6 +13,10 @@ export class StylerJS
     {
         this.options = options
         this.panel = new StylerPanel
+        this.classes = {
+            hover: 'sjs-element-hover',
+            focus: 'sjs-element-focus',
+        }
     }
 
     /**
@@ -60,24 +62,6 @@ export class StylerJS
     }
 
     /**
-     * Deselect all elements.
-     * 
-     * @param  any elm
-     * @return void
-     */
-    deselectElement(elm) {
-        const elements = document.querySelectorAll('.sjs-element-focus')
-
-        if (elements.length) {
-            for (let element of elements) {
-                if (elm !== element) {
-                    helpers.removeClass(element, 'sjs-element-focus')
-                }
-            }
-        }
-    }
-
-    /**
      * Gather all information about selector elements and corresponding styles.
      * 
      * @return void
@@ -85,13 +69,13 @@ export class StylerJS
     setElementEvents() {
         for (let element of this.elements) {
             element.addEventListener('mouseenter', () => {
-                if (!element.classList.contains('sjs-element-focus')) {
-                    element.classList.add('sjs-element-hover')
+                if (! element.classList.contains(this.classes.focus)) {
+                    element.classList.add(this.classes.hover)
                 }
             })
             element.addEventListener('mouseleave', () => {
-                if (element.classList.contains('sjs-element-hover')) {
-                    helpers.removeClass(element, 'sjs-element-hover')
+                if (element.classList.contains(this.classes.hover)) {
+                    helpers.removeClass(element, this.classes.hover)
                 }
             })
             element.addEventListener('click', (e) => {
@@ -102,13 +86,31 @@ export class StylerJS
                 this.deselectElement(element)
 
                 // then visually select the element
-                element.classList.remove('sjs-element-hover')
-                element.classList.add('sjs-element-focus')
+                element.classList.remove(this.classes.hover)
+                element.classList.add(this.classes.focus)
 
                 // finally destroy and build the style panel
                 this.panel.destroy()
                 this.panel.build(element)
             })
+        }
+    }
+
+     /**
+     * Deselect all elements.
+     * 
+     * @param  any elm
+     * @return void
+     */
+    deselectElement(elm) {
+        const elements = document.querySelectorAll(`.${this.classes.focus}`)
+
+        if (elements.length) {
+            for (let element of elements) {
+                if (elm !== element) {
+                    helpers.removeClass(element, this.classes.focus)
+                }
+            }
         }
     }
 
