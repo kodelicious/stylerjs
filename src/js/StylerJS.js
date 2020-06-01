@@ -32,11 +32,9 @@ export class StylerJS
      * @return void
      */
     run() {
-        return document.addEventListener('DOMContentLoaded', () => {
-            this.setElements()
-            this.setEvents()
-            // this.gatherData()
-        })
+        this.setElements()
+        this.setEvents()
+        // this.gatherData()
     }
 
     /**

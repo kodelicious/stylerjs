@@ -331,14 +331,8 @@ var StylerJS = /*#__PURE__*/function () {
   }, {
     key: "run",
     value: function run() {
-      var _this = this;
-
-      return document.addEventListener('DOMContentLoaded', function () {
-        _this.setElements();
-
-        _this.setEvents(); // this.gatherData()
-
-      });
+      this.setElements();
+      this.setEvents(); // this.gatherData()
     }
     /**
      * Set several events.
@@ -361,12 +355,12 @@ var StylerJS = /*#__PURE__*/function () {
   }, {
     key: "setDocumentEvents",
     value: function setDocumentEvents() {
-      var _this2 = this;
+      var _this = this;
 
       document.addEventListener('click', function () {
-        _this2.deselectElement();
+        _this.deselectElement();
 
-        _this2.panel.destroy();
+        _this.panel.destroy();
       });
     }
     /**
@@ -409,7 +403,7 @@ var StylerJS = /*#__PURE__*/function () {
   }, {
     key: "setElementEvents",
     value: function setElementEvents() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _iterator2 = _createForOfIteratorHelper(this.elements),
           _step2;
@@ -431,15 +425,15 @@ var StylerJS = /*#__PURE__*/function () {
             // make sure document click is not fired
             e.stopPropagation(); // remove other outlines
 
-            _this3.deselectElement(element); // then visually select the element
+            _this2.deselectElement(element); // then visually select the element
 
 
             element.classList.remove('sjs-element-hover');
             element.classList.add('sjs-element-focus'); // finally destroy and build the style panel
 
-            _this3.panel.destroy();
+            _this2.panel.destroy();
 
-            _this3.panel.build(element);
+            _this2.panel.build(element);
           });
         };
 
