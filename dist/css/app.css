@@ -1,0 +1,36 @@
+#sjs-panel {
+  background-color: darkgray;
+  border-radius: 4px;
+  bottom: 6px;
+  position: fixed;
+  right: 5px;
+  top: 5px;
+  width: 400px;
+  z-index: 999999;
+}
+
+.sjs-element-select,
+.sjs-element-selected {
+  position: relative;
+}
+
+.sjs-element-select:before,
+.sjs-element-select:after,
+.sjs-element-selected:before,
+.sjs-element-selected:after {
+  background-color: transparent;
+  border: 1px solid white;
+  bottom: 0;
+  box-sizing: border-box;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.sjs-element-select:after,
+.sjs-element-selected:after {
+  border: 1px dotted black;
+}
+
