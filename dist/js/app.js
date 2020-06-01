@@ -282,6 +282,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerJS", function() { return StylerJS; });
 /* harmony import */ var _allowed_properties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allowed-properties */ "./src/js/allowed-properties.js");
 /* harmony import */ var _StylerPanel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerPanel */ "./src/js/StylerPanel.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers */ "./src/js/helpers.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -296,9 +297,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 var StylerJS = /*#__PURE__*/function () {
   /**
-   * Construct the class
+   * Construct the class.
    * 
    * @param StylerOptions options
    */
@@ -309,7 +311,7 @@ var StylerJS = /*#__PURE__*/function () {
     this.panel = new _StylerPanel__WEBPACK_IMPORTED_MODULE_1__["StylerPanel"]();
   }
   /**
-   * Get the elements based on the options selector
+   * Get the elements based on the options selector.
    * 
    * @return any
    */
@@ -321,7 +323,7 @@ var StylerJS = /*#__PURE__*/function () {
       this.elements = document.querySelectorAll(this.options.selector);
     }
     /**
-     * Start running
+     * Start running.
      * 
      * @return void
      */
@@ -339,7 +341,7 @@ var StylerJS = /*#__PURE__*/function () {
       });
     }
     /**
-     * Set several events
+     * Set several events.
      * 
      * @return void
      */
@@ -351,7 +353,7 @@ var StylerJS = /*#__PURE__*/function () {
       this.setElementEvents();
     }
     /**
-     * Set events on the document node
+     * Set events on the document node.
      * 
      * @return void
      */
@@ -368,7 +370,7 @@ var StylerJS = /*#__PURE__*/function () {
       });
     }
     /**
-     * Deselect all elements
+     * Deselect all elements.
      * 
      * @param  any elm
      * @return void
@@ -377,7 +379,7 @@ var StylerJS = /*#__PURE__*/function () {
   }, {
     key: "deselectElement",
     value: function deselectElement(elm) {
-      var elements = document.querySelectorAll('.sjs-element-selected');
+      var elements = document.querySelectorAll('.sjs-element-focus');
 
       if (elements.length) {
         var _iterator = _createForOfIteratorHelper(elements),
@@ -386,7 +388,10 @@ var StylerJS = /*#__PURE__*/function () {
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var element = _step.value;
-            if (elm !== element) element.classList.remove('sjs-element-selected');
+
+            if (elm !== element) {
+              _helpers__WEBPACK_IMPORTED_MODULE_2__["default"].removeClass(element, 'sjs-element-focus');
+            }
           }
         } catch (err) {
           _iterator.e(err);
@@ -396,7 +401,7 @@ var StylerJS = /*#__PURE__*/function () {
       }
     }
     /**
-     * Gather all information about selector elements and corresponding styles
+     * Gather all information about selector elements and corresponding styles.
      * 
      * @return void
      */
@@ -413,13 +418,13 @@ var StylerJS = /*#__PURE__*/function () {
         var _loop = function _loop() {
           var element = _step2.value;
           element.addEventListener('mouseenter', function () {
-            if (!element.classList.contains('sjs-element-selected')) {
-              element.classList.add('sjs-element-select');
+            if (!element.classList.contains('sjs-element-focus')) {
+              element.classList.add('sjs-element-hover');
             }
           });
           element.addEventListener('mouseleave', function () {
-            if (element.classList.contains('sjs-element-select')) {
-              element.classList.remove('sjs-element-select');
+            if (element.classList.contains('sjs-element-hover')) {
+              _helpers__WEBPACK_IMPORTED_MODULE_2__["default"].removeClass(element, 'sjs-element-hover');
             }
           });
           element.addEventListener('click', function (e) {
@@ -429,8 +434,8 @@ var StylerJS = /*#__PURE__*/function () {
             _this3.deselectElement(element); // then visually select the element
 
 
-            element.classList.remove('sjs-element-select');
-            element.classList.add('sjs-element-selected'); // finally destroy and build the style panel
+            element.classList.remove('sjs-element-hover');
+            element.classList.add('sjs-element-focus'); // finally destroy and build the style panel
 
             _this3.panel.destroy();
 
@@ -448,7 +453,7 @@ var StylerJS = /*#__PURE__*/function () {
       }
     }
     /**
-     * Gather all information about selector elements and corresponding styles
+     * Gather all information about selector elements and corresponding styles.
      * 
      * @return void
      */
@@ -671,6 +676,29 @@ __webpack_require__.r(__webpack_exports__);
 new _StylerJS__WEBPACK_IMPORTED_MODULE_0__["StylerJS"]({
   selector: 'h1'
 }).run();
+
+/***/ }),
+
+/***/ "./src/js/helpers.js":
+/*!***************************!*\
+  !*** ./src/js/helpers.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  removeClass: function removeClass(elm, cls) {
+    if (elm) {
+      elm.classList.remove(cls);
+
+      if (!elm.classList.length) {
+        elm.removeAttribute('class');
+      }
+    }
+  }
+});
 
 /***/ }),
 

@@ -1,10 +1,13 @@
 import allowedProperties from './allowed-properties'
 import { StylerPanel } from './StylerPanel'
+import helpers from './helpers'
+
+
 
 export class StylerJS
 {
     /**
-     * Construct the class
+     * Construct the class.
      * 
      * @param StylerOptions options
      */
@@ -15,7 +18,7 @@ export class StylerJS
     }
 
     /**
-     * Get the elements based on the options selector
+     * Get the elements based on the options selector.
      * 
      * @return any
      */
@@ -24,7 +27,7 @@ export class StylerJS
     }
 
     /**
-     * Start running
+     * Start running.
      * 
      * @return void
      */
@@ -37,7 +40,7 @@ export class StylerJS
     }
 
     /**
-     * Set several events
+     * Set several events.
      * 
      * @return void
      */
@@ -47,7 +50,7 @@ export class StylerJS
     }
 
     /**
-     * Set events on the document node
+     * Set events on the document node.
      * 
      * @return void
      */
@@ -59,36 +62,38 @@ export class StylerJS
     }
 
     /**
-     * Deselect all elements
+     * Deselect all elements.
      * 
      * @param  any elm
      * @return void
      */
     deselectElement(elm) {
-        const elements = document.querySelectorAll('.sjs-element-selected')
+        const elements = document.querySelectorAll('.sjs-element-focus')
 
         if (elements.length) {
             for (let element of elements) {
-                if (elm !== element) element.classList.remove('sjs-element-selected')
+                if (elm !== element) {
+                    helpers.removeClass(element, 'sjs-element-focus')
+                }
             }
         }
     }
 
     /**
-     * Gather all information about selector elements and corresponding styles
+     * Gather all information about selector elements and corresponding styles.
      * 
      * @return void
      */
     setElementEvents() {
         for (let element of this.elements) {
             element.addEventListener('mouseenter', () => {
-                if (!element.classList.contains('sjs-element-selected')) {
-                    element.classList.add('sjs-element-select')
+                if (!element.classList.contains('sjs-element-focus')) {
+                    element.classList.add('sjs-element-hover')
                 }
             })
             element.addEventListener('mouseleave', () => {
-                if (element.classList.contains('sjs-element-select')) {
-                    element.classList.remove('sjs-element-select')
+                if (element.classList.contains('sjs-element-hover')) {
+                    helpers.removeClass(element, 'sjs-element-hover')
                 }
             })
             element.addEventListener('click', (e) => {
@@ -99,8 +104,8 @@ export class StylerJS
                 this.deselectElement(element)
 
                 // then visually select the element
-                element.classList.remove('sjs-element-select')
-                element.classList.add('sjs-element-selected')
+                element.classList.remove('sjs-element-hover')
+                element.classList.add('sjs-element-focus')
 
                 // finally destroy and build the style panel
                 this.panel.destroy()
@@ -110,7 +115,7 @@ export class StylerJS
     }
 
     /**
-     * Gather all information about selector elements and corresponding styles
+     * Gather all information about selector elements and corresponding styles.
      * 
      * @return void
      */

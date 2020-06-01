@@ -9,8 +9,8 @@
     z-index: 999999
 }
 
-.sjs-element-select,
-.sjs-element-selected {
+.sjs-element-hover,
+.sjs-element-focus {
     position: relative;
 
     &:before,

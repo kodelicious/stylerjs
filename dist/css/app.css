@@ -9,15 +9,15 @@
   z-index: 999999;
 }
 
-.sjs-element-select,
-.sjs-element-selected {
+.sjs-element-hover,
+.sjs-element-focus {
   position: relative;
 }
 
-.sjs-element-select:before,
-.sjs-element-select:after,
-.sjs-element-selected:before,
-.sjs-element-selected:after {
+.sjs-element-hover:before,
+.sjs-element-hover:after,
+.sjs-element-focus:before,
+.sjs-element-focus:after {
   background-color: transparent;
   border: 1px solid white;
   bottom: 0;
@@ -29,8 +29,8 @@
   top: 0;
 }
 
-.sjs-element-select:after,
-.sjs-element-selected:after {
+.sjs-element-hover:after,
+.sjs-element-focus:after {
   border: 1px dotted black;
 }
 
