@@ -104,17 +104,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var StylerControl = /*#__PURE__*/function () {
   /**
-   * Construct the class
+   * Construct the class.
    * 
    * @param
    */
   function StylerControl() {
     _classCallCheck(this, StylerControl);
 
-    this.template = this.getTemplate();
+    this.label = 'My Label';
+    this.name = '';
+    this.value = '';
   }
   /**
-   * Set element
+   * Set element.
    * 
    * @param  HTMLElement element
    * @return void
@@ -127,7 +129,43 @@ var StylerControl = /*#__PURE__*/function () {
       this.element = element;
     }
     /**
-     * Set panel
+     * Set label for the template.
+     * 
+     * @param  string label
+     * @return void
+     */
+
+  }, {
+    key: "setLabel",
+    value: function setLabel(label) {
+      this.label = label;
+    }
+    /**
+     * Set name of the control.
+     * 
+     * @param  string name
+     * @return void
+     */
+
+  }, {
+    key: "setName",
+    value: function setName(name) {
+      this.name = name;
+    }
+    /**
+     * Set value of the control.
+     * 
+     * @param  string value
+     * @return void
+     */
+
+  }, {
+    key: "setValue",
+    value: function setValue(value) {
+      this.value = value;
+    }
+    /**
+     * Set panel element for injecting the template.
      * 
      * @param  HTMLDivElement panel
      * @return void
@@ -139,7 +177,7 @@ var StylerControl = /*#__PURE__*/function () {
       this.panel = panel;
     }
     /**
-     * Get the template for this form control
+     * Get the whole template for this form control.
      * 
      * @return string
      */
@@ -147,17 +185,27 @@ var StylerControl = /*#__PURE__*/function () {
   }, {
     key: "getTemplate",
     value: function getTemplate() {
-      return '';
+      return "\n        <div class=\"sjs-form-group\">\n            <div class=\"sjs-form-label\">\n                ".concat(this.label, "\n            </div>\n            <div class=\"sjs-form-control\">\n                ").concat(this.getControlTemplate(), "\n            </div>\n        </div>\n        ");
     }
     /**
-     * Set events on elements in the template
+     * Get the template for this form control.
      * 
      * @return void
      */
 
   }, {
+    key: "getControlTemplate",
+    value: function getControlTemplate() {}
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+
+  }, {
     key: "setEvents",
-    value: function setEvents() {}
+    value: function setEvents(rootElement) {}
     /**
      * Set events on elements in the template
      * 
@@ -166,7 +214,11 @@ var StylerControl = /*#__PURE__*/function () {
 
   }, {
     key: "build",
-    value: function build() {}
+    value: function build() {
+      var rootElement = document.createRange().createContextualFragment(this.getTemplate()).querySelector('div');
+      this.setEvents(rootElement);
+      this.panel.appendChild(rootElement);
+    }
   }]);
 
   return StylerControl;
@@ -214,7 +266,7 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
   var _super = _createSuper(StylerInputText);
 
   /**
-   * Construct the class
+   * Construct the class.
    * 
    * @param
    */
@@ -224,44 +276,33 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
     return _super.call(this);
   }
   /**
-   * Get the template for this form control
+   * Get the template for this form control.
    * 
    * @return string
    */
 
 
   _createClass(StylerInputText, [{
-    key: "getTemplate",
-    value: function getTemplate() {
-      return "\n        <div><input type=\"text\" name=\"color\" value=\"\"></div>\n        ";
+    key: "getControlTemplate",
+    value: function getControlTemplate() {
+      return "\n        <input type=\"text\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" />\n        ");
     }
     /**
-     * Set events on elements in the template
+     * Set events on elements in the template.
      * 
+     * @param  HTMLDivElement rootElement
      * @return void
      */
 
   }, {
     key: "setEvents",
-    value: function setEvents() {
+    value: function setEvents(rootElement) {
       var _this = this;
 
-      var input = this.panel.querySelector('input');
+      var input = rootElement.querySelector('input');
       input.addEventListener('blur', function () {
         _this.element.style[input.getAttribute('name')] = input.value;
       });
-    }
-    /**
-     * Set events on elements in the template
-     * 
-     * @return void
-     */
-
-  }, {
-    key: "build",
-    value: function build() {
-      this.panel.innerHTML = this.template;
-      this.setEvents();
     }
   }]);
 
@@ -501,6 +542,7 @@ var StylerJS = /*#__PURE__*/function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerPanel", function() { return StylerPanel; });
 /* harmony import */ var _StylerInputText__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerInputText */ "./src/js/StylerInputText.js");
+/* harmony import */ var _StylerSelect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerSelect */ "./src/js/StylerSelect.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -509,9 +551,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 // import allowedProperties from './allowed-properties'
 
+
 var StylerPanel = /*#__PURE__*/function () {
   /**
-   * Construct the class
+   * Construct the class.
    * 
    * @param StylerOptions options
    */
@@ -521,7 +564,7 @@ var StylerPanel = /*#__PURE__*/function () {
     this.id = 'sjs-panel';
   }
   /**
-   * Destroy the StyleJS panel
+   * Destroy the StyleJS panel.
    * 
    * @return void
    */
@@ -537,7 +580,7 @@ var StylerPanel = /*#__PURE__*/function () {
       }
     }
     /**
-     * Build the StyleJS panel
+     * Build the StyleJS panel.
      * 
      * @param  HTMLElement element
      * @return void
@@ -557,12 +600,101 @@ var StylerPanel = /*#__PURE__*/function () {
       inputText.setElement(element);
       inputText.setPanel(panel);
       inputText.build();
+      var select = new _StylerSelect__WEBPACK_IMPORTED_MODULE_1__["StylerSelect"]();
+      select.setElement(element);
+      select.setPanel(panel);
+      select.build();
       document.body.appendChild(panel);
     }
   }]);
 
   return StylerPanel;
 }();
+
+/***/ }),
+
+/***/ "./src/js/StylerSelect.js":
+/*!********************************!*\
+  !*** ./src/js/StylerSelect.js ***!
+  \********************************/
+/*! exports provided: StylerSelect */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerSelect", function() { return StylerSelect; });
+/* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+var StylerSelect = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerSelect, _StylerControl);
+
+  var _super = _createSuper(StylerSelect);
+
+  /**
+   * Construct the class.
+   * 
+   * @param
+   */
+  function StylerSelect() {
+    _classCallCheck(this, StylerSelect);
+
+    return _super.call(this);
+  }
+  /**
+   * Get the template for this form control.
+   * 
+   * @return string
+   */
+
+
+  _createClass(StylerSelect, [{
+    key: "getControlTemplate",
+    value: function getControlTemplate() {
+      return "\n        <select name=\"".concat(this.name, "\">\n            <option value=\"Arial\">Arial</option>\n            <option value=\"Helvetica\">Helvetica</option>\n        </select>\n        ");
+    }
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+
+  }, {
+    key: "setEvents",
+    value: function setEvents(rootElement) {
+      var _this = this;
+
+      var select = rootElement.querySelector('select');
+      select.addEventListener('change', function () {
+        _this.element.style[select.getAttribute('name')] = select.value;
+      });
+    }
+  }]);
+
+  return StylerSelect;
+}(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
 
 /***/ }),
 

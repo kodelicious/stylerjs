@@ -1,10 +1,11 @@
 // import allowedProperties from './allowed-properties'
 import { StylerInputText } from './StylerInputText'
+import { StylerSelect } from './StylerSelect'
 
 export class StylerPanel
 {
     /**
-     * Construct the class
+     * Construct the class.
      * 
      * @param StylerOptions options
      */
@@ -14,7 +15,7 @@ export class StylerPanel
     }
 
     /**
-     * Destroy the StyleJS panel
+     * Destroy the StyleJS panel.
      * 
      * @return void
      */
@@ -26,7 +27,7 @@ export class StylerPanel
     }
 
     /**
-     * Build the StyleJS panel
+     * Build the StyleJS panel.
      * 
      * @param  HTMLElement element
      * @return void
@@ -45,6 +46,11 @@ export class StylerPanel
         inputText.setElement(element)
         inputText.setPanel(panel)
         inputText.build()
+
+        const select = new StylerSelect()
+        select.setElement(element)
+        select.setPanel(panel)
+        select.build()
 
         document.body.appendChild(panel)
     }

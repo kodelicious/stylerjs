@@ -1,6 +1,6 @@
 import { StylerControl } from './StylerControl'
 
-export class StylerInputText extends StylerControl
+export class StylerSelect extends StylerControl
 {
     /**
      * Construct the class.
@@ -19,7 +19,10 @@ export class StylerInputText extends StylerControl
      */
     getControlTemplate() {
         return `
-        <input type="text" name="${this.name}" value="${this.value}" />
+        <select name="${this.name}">
+            <option value="Arial">Arial</option>
+            <option value="Helvetica">Helvetica</option>
+        </select>
         `
     }
 
@@ -30,10 +33,10 @@ export class StylerInputText extends StylerControl
      * @return void
      */
     setEvents(rootElement) {
-        const input = rootElement.querySelector('input')
+        const select = rootElement.querySelector('select')
 
-        input.addEventListener('blur', () => {
-            this.element.style[input.getAttribute('name')] = input.value
+        select.addEventListener('change', () => {
+            this.element.style[select.getAttribute('name')] = select.value
         })
     }
 }

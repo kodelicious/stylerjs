@@ -1,17 +1,19 @@
 export class StylerControl
 {
     /**
-     * Construct the class
+     * Construct the class.
      * 
      * @param
      */
     constructor()
     {
-        this.template = this.getTemplate()
+        this.label = 'My Label';
+        this.name = '';
+        this.value = '';
     }
 
     /**
-     * Set element
+     * Set element.
      * 
      * @param  HTMLElement element
      * @return void
@@ -21,7 +23,37 @@ export class StylerControl
     }
 
     /**
-     * Set panel
+     * Set label for the template.
+     * 
+     * @param  string label
+     * @return void
+     */
+    setLabel(label) {
+        this.label = label
+    }
+
+    /**
+     * Set name of the control.
+     * 
+     * @param  string name
+     * @return void
+     */
+    setName(name) {
+        this.name = name
+    }
+
+    /**
+     * Set value of the control.
+     * 
+     * @param  string value
+     * @return void
+     */
+    setValue(value) {
+        this.value = value
+    }
+
+    /**
+     * Set panel element for injecting the template.
      * 
      * @param  HTMLDivElement panel
      * @return void
@@ -31,25 +63,47 @@ export class StylerControl
     }
 
     /**
-     * Get the template for this form control
+     * Get the whole template for this form control.
      * 
      * @return string
      */
     getTemplate() {
-        return ''
+        return `
+        <div class="sjs-form-group">
+            <div class="sjs-form-label">
+                ${this.label}
+            </div>
+            <div class="sjs-form-control">
+                ${this.getControlTemplate()}
+            </div>
+        </div>
+        `
     }
 
     /**
-     * Set events on elements in the template
+     * Get the template for this form control.
      * 
      * @return void
      */
-    setEvents() {}
+    getControlTemplate() {}
+
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+    setEvents(rootElement) {}
 
     /**
      * Set events on elements in the template
      * 
      * @return void
      */
-    build() {}
+    build() {
+        const rootElement = document.createRange().createContextualFragment(this.getTemplate()).querySelector('div')
+        this.setEvents(rootElement)
+
+        this.panel.appendChild(rootElement);
+    }
 }
