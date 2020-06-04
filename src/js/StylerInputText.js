@@ -7,8 +7,7 @@ export class StylerInputText extends StylerControl
      * 
      * @param
      */
-    constructor()
-    {
+    constructor() {
         super()
     }
 

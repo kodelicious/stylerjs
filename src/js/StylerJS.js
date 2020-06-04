@@ -1,4 +1,3 @@
-import allowedProperties from './allowed-properties'
 import { StylerPanel } from './StylerPanel'
 import helpers from './helpers'
 
@@ -9,8 +8,7 @@ export class StylerJS
      * 
      * @param StylerOptions options
      */
-    constructor(options)
-    {
+    constructor(options) {
         this.options = options
         this.panel = new StylerPanel
         this.classes = {

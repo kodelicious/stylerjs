@@ -7,8 +7,7 @@ export class StylerSelect extends StylerControl
      * 
      * @param
      */
-    constructor()
-    {
+    constructor() {
         super()
     }
 

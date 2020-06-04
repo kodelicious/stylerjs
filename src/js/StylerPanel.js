@@ -1,4 +1,4 @@
-// import allowedProperties from './allowed-properties'
+import allowedProperties from './allowed-properties'
 import { StylerInputText } from './StylerInputText'
 import { StylerSelect } from './StylerSelect'
 
@@ -9,8 +9,7 @@ export class StylerPanel
      * 
      * @param StylerOptions options
      */
-    constructor(options)
-    {
+    constructor(options) {
         this.id = 'sjs-panel'
     }
 
@@ -33,6 +32,7 @@ export class StylerPanel
      * @return void
      */
     build(element) {
+        alert(123)
         const panel = document.createElement('div')
         panel.setAttribute('id', this.id)
 
@@ -41,7 +41,11 @@ export class StylerPanel
             e.stopPropagation()
         })
 
-        // set html
+        // loop through all allowed groups and properties
+        for (let group in allowedProperties) {
+            const properties = allowedProperties.getPropertyValue(group)
+            console.log(properties)
+        }
         const inputText = new StylerInputText()
         inputText.setElement(element)
         inputText.setPanel(panel)

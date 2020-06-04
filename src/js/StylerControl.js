@@ -5,8 +5,7 @@ export class StylerControl
      * 
      * @param
      */
-    constructor()
-    {
+    constructor() {
         this.label = 'My Label';
         this.name = '';
         this.value = '';
