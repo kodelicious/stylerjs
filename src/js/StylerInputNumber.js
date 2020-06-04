@@ -18,7 +18,7 @@ export class StylerInputNumber extends StylerControl
      */
     getControlTemplate() {
         return `
-        <input type="number" name="${this.name}" value="${this.value}" min="0" />
+        <input type="number" name="${this.name}" value="${this.value}"${this.attributes} />
         `
     }
 

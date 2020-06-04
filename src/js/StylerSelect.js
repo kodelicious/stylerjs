@@ -18,7 +18,7 @@ export class StylerSelect extends StylerControl
      */
     getControlTemplate() {
         let html = `
-        <select name="${this.name}">
+        <select name="${this.name}"${this.attributes}>
         `
 
         for (let i = 0; i < this.data.length; i++) {

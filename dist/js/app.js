@@ -114,6 +114,7 @@ var StylerControl = /*#__PURE__*/function () {
     this.label = 'My Label';
     this.name = '';
     this.value = '';
+    this.attributes = '';
     this.date = [];
   }
   /**
@@ -176,6 +177,22 @@ var StylerControl = /*#__PURE__*/function () {
     key: "setUnit",
     value: function setUnit(unit) {
       this.unit = unit;
+    }
+    /**
+     * Set all attributes of the control.
+     * 
+     * @param  object attributes
+     * @return void
+     */
+
+  }, {
+    key: "setAttributes",
+    value: function setAttributes(attributes) {
+      if (Object.keys(attributes).length) {
+        for (var attributeKey in attributes) {
+          this.attributes += " ".concat(attributeKey, "=\"").concat(attributes[attributeKey], "\"");
+        }
+      }
     }
     /**
      * Set data of the control.
@@ -310,7 +327,7 @@ var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
   _createClass(StylerInputNumber, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      return "\n        <input type=\"number\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" min=\"0\" />\n        ");
+      return "\n        <input type=\"number\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\"").concat(this.attributes, " />\n        ");
     }
     /**
      * Set events on elements in the template.
@@ -395,7 +412,7 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
   _createClass(StylerInputText, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      return "\n        <input type=\"text\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" />\n        ");
+      return "\n        <input type=\"text\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\"").concat(this.attributes, " />\n        ");
     }
     /**
      * Set events on elements in the template.
@@ -734,6 +751,7 @@ var StylerPanel = /*#__PURE__*/function () {
             control.setName(propertyKey);
             control.setValue(property["default"]);
             control.setUnit(property.unit || '');
+            control.setAttributes(property.attributes || {});
             control.setData(property.data ? property.data.basic : []);
             control.setPanel(panel);
             control.build();
@@ -809,7 +827,7 @@ var StylerSelect = /*#__PURE__*/function (_StylerControl) {
   _createClass(StylerSelect, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      var html = "\n        <select name=\"".concat(this.name, "\">\n        ");
+      var html = "\n        <select name=\"".concat(this.name, "\"").concat(this.attributes, ">\n        ");
 
       for (var i = 0; i < this.data.length; i++) {
         var value = this.data[i];
@@ -872,6 +890,24 @@ __webpack_require__.r(__webpack_exports__);
       type: 'input-number',
       unit: 'rem',
       "default": 0,
+      attributes: {
+        min: 0,
+        max: 10,
+        step: 0.125
+      },
+      version: 'css1'
+    },
+    'margin': {
+      label: 'Margin',
+      javascript: 'margin',
+      type: 'input-number',
+      unit: 'rem',
+      "default": 0,
+      attributes: {
+        min: 0,
+        max: 10,
+        step: 0.125
+      },
       version: 'css1'
     }
   }

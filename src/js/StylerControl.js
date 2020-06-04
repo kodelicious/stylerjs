@@ -9,6 +9,7 @@ export class StylerControl
         this.label = 'My Label';
         this.name = '';
         this.value = '';
+        this.attributes = '';
         this.date = [];
     }
 
@@ -60,6 +61,20 @@ export class StylerControl
      */
     setUnit(unit) {
         this.unit = unit
+    }
+
+    /**
+     * Set all attributes of the control.
+     * 
+     * @param  object attributes
+     * @return void
+     */
+    setAttributes(attributes) {
+        if (Object.keys(attributes).length) {
+            for (let attributeKey in attributes) {
+                this.attributes += ` ${attributeKey}="${attributes[attributeKey]}"`
+            }
+        }
     }
 
     /**

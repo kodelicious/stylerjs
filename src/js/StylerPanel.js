@@ -66,6 +66,7 @@ export class StylerPanel
                     control.setName(propertyKey)
                     control.setValue(property.default)
                     control.setUnit(property.unit || '')
+                    control.setAttributes(property.attributes || {})
                     control.setData(property.data ? property.data.basic : [])
                     control.setPanel(panel)
                     control.build()

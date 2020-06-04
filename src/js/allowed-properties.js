@@ -37,8 +37,26 @@ export default {
             type: 'input-number',
             unit: 'rem',
             default: 0,
+            attributes: {
+                min: 0,
+                max: 10,
+                step: 0.125,
+            },
             version: 'css1'
-        }
+        },
+        'margin': {
+            label: 'Margin',
+            javascript: 'margin',
+            type: 'input-number',
+            unit: 'rem',
+            default: 0,
+            attributes: {
+                min: 0,
+                max: 10,
+                step: 0.125,
+            },
+            version: 'css1'
+        },
     }
 }
 
