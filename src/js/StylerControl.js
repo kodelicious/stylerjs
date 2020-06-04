@@ -53,6 +53,16 @@ export class StylerControl
     }
 
     /**
+     * Set unit of the control for the value.
+     * 
+     * @param  string unit
+     * @return void
+     */
+    setUnit(unit) {
+        this.unit = unit
+    }
+
+    /**
      * Set data of the control.
      * 
      * @param  array data

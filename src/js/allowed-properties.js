@@ -4,7 +4,7 @@ export default {
             label: 'Display',
             javascript: 'display',
             type: 'select',
-            values: {
+            data: {
                 basic: [
                     'inline',
                     'block',
@@ -29,6 +29,14 @@ export default {
                 ],
             },
             default: 'flex',
+            version: 'css1'
+        },
+        'padding': {
+            label: 'Padding',
+            javascript: 'padding',
+            type: 'input-number',
+            unit: 'rem',
+            default: 0,
             version: 'css1'
         }
     }

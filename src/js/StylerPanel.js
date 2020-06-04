@@ -1,5 +1,6 @@
 import allowedProperties from './allowed-properties'
 import { StylerInputText } from './StylerInputText'
+import { StylerInputNumber } from './StylerInputNumber'
 import { StylerSelect } from './StylerSelect'
 
 export class StylerPanel
@@ -51,6 +52,9 @@ export class StylerPanel
                     case 'input-text': 
                         control = new StylerInputText
                     break;
+                    case 'input-number': 
+                        control = new StylerInputNumber
+                    break;
                     case 'select': 
                         control = new StylerSelect
                     break;
@@ -61,7 +65,8 @@ export class StylerPanel
                     control.setLabel(property.label)
                     control.setName(propertyKey)
                     control.setValue(property.default)
-                    control.setData(property.values.basic)
+                    control.setUnit(property.unit || '')
+                    control.setData(property.data ? property.data.basic : [])
                     control.setPanel(panel)
                     control.build()
                 }

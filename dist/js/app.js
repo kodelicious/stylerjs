@@ -166,6 +166,18 @@ var StylerControl = /*#__PURE__*/function () {
       this.value = value;
     }
     /**
+     * Set unit of the control for the value.
+     * 
+     * @param  string unit
+     * @return void
+     */
+
+  }, {
+    key: "setUnit",
+    value: function setUnit(unit) {
+      this.unit = unit;
+    }
+    /**
      * Set data of the control.
      * 
      * @param  array data
@@ -236,6 +248,91 @@ var StylerControl = /*#__PURE__*/function () {
 
   return StylerControl;
 }();
+
+/***/ }),
+
+/***/ "./src/js/StylerInputNumber.js":
+/*!*************************************!*\
+  !*** ./src/js/StylerInputNumber.js ***!
+  \*************************************/
+/*! exports provided: StylerInputNumber */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerInputNumber", function() { return StylerInputNumber; });
+/* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerInputNumber, _StylerControl);
+
+  var _super = _createSuper(StylerInputNumber);
+
+  /**
+   * Construct the class.
+   * 
+   * @param
+   */
+  function StylerInputNumber() {
+    _classCallCheck(this, StylerInputNumber);
+
+    return _super.call(this);
+  }
+  /**
+   * Get the template for this form control.
+   * 
+   * @return string
+   */
+
+
+  _createClass(StylerInputNumber, [{
+    key: "getControlTemplate",
+    value: function getControlTemplate() {
+      return "\n        <input type=\"number\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" min=\"0\" />\n        ");
+    }
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+
+  }, {
+    key: "setEvents",
+    value: function setEvents(rootElement) {
+      var _this = this;
+
+      var input = rootElement.querySelector('input');
+      input.addEventListener('change', function () {
+        _this.element.style[input.getAttribute('name')] = input.value + (_this.unit || '');
+      });
+    }
+  }]);
+
+  return StylerInputNumber;
+}(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
 
 /***/ }),
 
@@ -554,12 +651,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerPanel", function() { return StylerPanel; });
 /* harmony import */ var _allowed_properties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allowed-properties */ "./src/js/allowed-properties.js");
 /* harmony import */ var _StylerInputText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerInputText */ "./src/js/StylerInputText.js");
-/* harmony import */ var _StylerSelect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StylerSelect */ "./src/js/StylerSelect.js");
+/* harmony import */ var _StylerInputNumber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StylerInputNumber */ "./src/js/StylerInputNumber.js");
+/* harmony import */ var _StylerSelect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StylerSelect */ "./src/js/StylerSelect.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -620,8 +719,12 @@ var StylerPanel = /*#__PURE__*/function () {
               control = new _StylerInputText__WEBPACK_IMPORTED_MODULE_1__["StylerInputText"]();
               break;
 
+            case 'input-number':
+              control = new _StylerInputNumber__WEBPACK_IMPORTED_MODULE_2__["StylerInputNumber"]();
+              break;
+
             case 'select':
-              control = new _StylerSelect__WEBPACK_IMPORTED_MODULE_2__["StylerSelect"]();
+              control = new _StylerSelect__WEBPACK_IMPORTED_MODULE_3__["StylerSelect"]();
               break;
           }
 
@@ -630,7 +733,8 @@ var StylerPanel = /*#__PURE__*/function () {
             control.setLabel(property.label);
             control.setName(propertyKey);
             control.setValue(property["default"]);
-            control.setData(property.values.basic);
+            control.setUnit(property.unit || '');
+            control.setData(property.data ? property.data.basic : []);
             control.setPanel(panel);
             control.build();
           }
@@ -755,11 +859,19 @@ __webpack_require__.r(__webpack_exports__);
       label: 'Display',
       javascript: 'display',
       type: 'select',
-      values: {
+      data: {
         basic: ['inline', 'block', 'flex', 'inline-block', 'inline-flex', 'none'],
         advanced: ['inline-table', 'list-item', 'run-in', 'table', 'table-caption', 'table-column-group', 'table-header-group', 'table-footer-group', 'table-row-group', 'table-cell', 'table-column', 'table-row']
       },
       "default": 'flex',
+      version: 'css1'
+    },
+    'padding': {
+      label: 'Padding',
+      javascript: 'padding',
+      type: 'input-number',
+      unit: 'rem',
+      "default": 0,
       version: 'css1'
     }
   }
