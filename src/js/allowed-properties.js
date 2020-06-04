@@ -1,6 +1,7 @@
 export default {
     layout: {
         'display': {
+            label: 'Display',
             javascript: 'display',
             type: 'select',
             values: {
@@ -27,7 +28,7 @@ export default {
                     'table-row'
                 ],
             },
-            default: 'inline',
+            default: 'flex',
             version: 'css1'
         }
     }

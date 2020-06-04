@@ -32,7 +32,6 @@ export class StylerPanel
      * @return void
      */
     build(element) {
-        alert(123)
         const panel = document.createElement('div')
         panel.setAttribute('id', this.id)
 
@@ -42,19 +41,32 @@ export class StylerPanel
         })
 
         // loop through all allowed groups and properties
-        for (let group in allowedProperties) {
-            const properties = allowedProperties.getPropertyValue(group)
-            console.log(properties)
-        }
-        const inputText = new StylerInputText()
-        inputText.setElement(element)
-        inputText.setPanel(panel)
-        inputText.build()
+        for (let groupKey in allowedProperties) {
+            const properties = allowedProperties[groupKey]
+            for (let propertyKey in properties) {
+                const property = properties[propertyKey]
+                let control
 
-        const select = new StylerSelect()
-        select.setElement(element)
-        select.setPanel(panel)
-        select.build()
+                switch (property.type) {
+                    case 'input-text': 
+                        control = new StylerInputText
+                    break;
+                    case 'select': 
+                        control = new StylerSelect
+                    break;
+                }
+
+                if (control) {
+                    control.setElement(element)
+                    control.setLabel(property.label)
+                    control.setName(propertyKey)
+                    control.setValue(property.default)
+                    control.setData(property.values.basic)
+                    control.setPanel(panel)
+                    control.build()
+                }
+            }
+        }
 
         document.body.appendChild(panel)
     }

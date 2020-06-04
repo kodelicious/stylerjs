@@ -9,6 +9,7 @@ export class StylerControl
         this.label = 'My Label';
         this.name = '';
         this.value = '';
+        this.date = [];
     }
 
     /**
@@ -49,6 +50,16 @@ export class StylerControl
      */
     setValue(value) {
         this.value = value
+    }
+
+    /**
+     * Set data of the control.
+     * 
+     * @param  array data
+     * @return void
+     */
+    setData(data) {
+        this.data = data
     }
 
     /**

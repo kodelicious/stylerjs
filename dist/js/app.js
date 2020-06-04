@@ -114,6 +114,7 @@ var StylerControl = /*#__PURE__*/function () {
     this.label = 'My Label';
     this.name = '';
     this.value = '';
+    this.date = [];
   }
   /**
    * Set element.
@@ -163,6 +164,18 @@ var StylerControl = /*#__PURE__*/function () {
     key: "setValue",
     value: function setValue(value) {
       this.value = value;
+    }
+    /**
+     * Set data of the control.
+     * 
+     * @param  array data
+     * @return void
+     */
+
+  }, {
+    key: "setData",
+    value: function setData(data) {
+      this.data = data;
     }
     /**
      * Set panel element for injecting the template.
@@ -321,9 +334,8 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerJS", function() { return StylerJS; });
-/* harmony import */ var _allowed_properties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allowed-properties */ "./src/js/allowed-properties.js");
-/* harmony import */ var _StylerPanel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerPanel */ "./src/js/StylerPanel.js");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers */ "./src/js/helpers.js");
+/* harmony import */ var _StylerPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerPanel */ "./src/js/StylerPanel.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./src/js/helpers.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -338,7 +350,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-
 var StylerJS = /*#__PURE__*/function () {
   /**
    * Construct the class.
@@ -349,7 +360,7 @@ var StylerJS = /*#__PURE__*/function () {
     _classCallCheck(this, StylerJS);
 
     this.options = options;
-    this.panel = new _StylerPanel__WEBPACK_IMPORTED_MODULE_1__["StylerPanel"]();
+    this.panel = new _StylerPanel__WEBPACK_IMPORTED_MODULE_0__["StylerPanel"]();
     this.classes = {
       hover: 'sjs-element-hover',
       focus: 'sjs-element-focus'
@@ -432,7 +443,7 @@ var StylerJS = /*#__PURE__*/function () {
           });
           element.addEventListener('mouseleave', function () {
             if (element.classList.contains(_this2.classes.hover)) {
-              _helpers__WEBPACK_IMPORTED_MODULE_2__["default"].removeClass(element, _this2.classes.hover);
+              _helpers__WEBPACK_IMPORTED_MODULE_1__["default"].removeClass(element, _this2.classes.hover);
             }
           });
           element.addEventListener('click', function (e) {
@@ -481,7 +492,7 @@ var StylerJS = /*#__PURE__*/function () {
             var element = _step2.value;
 
             if (elm !== element) {
-              _helpers__WEBPACK_IMPORTED_MODULE_2__["default"].removeClass(element, this.classes.focus);
+              _helpers__WEBPACK_IMPORTED_MODULE_1__["default"].removeClass(element, this.classes.focus);
             }
           }
         } catch (err) {
@@ -541,15 +552,16 @@ var StylerJS = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerPanel", function() { return StylerPanel; });
-/* harmony import */ var _StylerInputText__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerInputText */ "./src/js/StylerInputText.js");
-/* harmony import */ var _StylerSelect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerSelect */ "./src/js/StylerSelect.js");
+/* harmony import */ var _allowed_properties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allowed-properties */ "./src/js/allowed-properties.js");
+/* harmony import */ var _StylerInputText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerInputText */ "./src/js/StylerInputText.js");
+/* harmony import */ var _StylerSelect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StylerSelect */ "./src/js/StylerSelect.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// import allowedProperties from './allowed-properties'
+
 
 
 var StylerPanel = /*#__PURE__*/function () {
@@ -594,16 +606,37 @@ var StylerPanel = /*#__PURE__*/function () {
 
       panel.addEventListener('click', function (e) {
         e.stopPropagation();
-      }); // set html
+      }); // loop through all allowed groups and properties
 
-      var inputText = new _StylerInputText__WEBPACK_IMPORTED_MODULE_0__["StylerInputText"]();
-      inputText.setElement(element);
-      inputText.setPanel(panel);
-      inputText.build();
-      var select = new _StylerSelect__WEBPACK_IMPORTED_MODULE_1__["StylerSelect"]();
-      select.setElement(element);
-      select.setPanel(panel);
-      select.build();
+      for (var groupKey in _allowed_properties__WEBPACK_IMPORTED_MODULE_0__["default"]) {
+        var properties = _allowed_properties__WEBPACK_IMPORTED_MODULE_0__["default"][groupKey];
+
+        for (var propertyKey in properties) {
+          var property = properties[propertyKey];
+          var control = void 0;
+
+          switch (property.type) {
+            case 'input-text':
+              control = new _StylerInputText__WEBPACK_IMPORTED_MODULE_1__["StylerInputText"]();
+              break;
+
+            case 'select':
+              control = new _StylerSelect__WEBPACK_IMPORTED_MODULE_2__["StylerSelect"]();
+              break;
+          }
+
+          if (control) {
+            control.setElement(element);
+            control.setLabel(property.label);
+            control.setName(propertyKey);
+            control.setValue(property["default"]);
+            control.setData(property.values.basic);
+            control.setPanel(panel);
+            control.build();
+          }
+        }
+      }
+
       document.body.appendChild(panel);
     }
   }]);
@@ -665,14 +698,23 @@ var StylerSelect = /*#__PURE__*/function (_StylerControl) {
   /**
    * Get the template for this form control.
    * 
-   * @return string
+   * @return string html
    */
 
 
   _createClass(StylerSelect, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      return "\n        <select name=\"".concat(this.name, "\">\n            <option value=\"Arial\">Arial</option>\n            <option value=\"Helvetica\">Helvetica</option>\n        </select>\n        ");
+      var html = "\n        <select name=\"".concat(this.name, "\">\n        ");
+
+      for (var i = 0; i < this.data.length; i++) {
+        var value = this.data[i];
+        var selected = this.value === value ? ' selected' : '';
+        html += "\n            <option value=\"".concat(value, "\"").concat(selected, ">").concat(value, "</option>\n            ");
+      }
+
+      html += "\n        </select>\n        ";
+      return html;
     }
     /**
      * Set events on elements in the template.
@@ -710,13 +752,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: {
     'display': {
+      label: 'Display',
       javascript: 'display',
       type: 'select',
       values: {
         basic: ['inline', 'block', 'flex', 'inline-block', 'inline-flex', 'none'],
         advanced: ['inline-table', 'list-item', 'run-in', 'table', 'table-caption', 'table-column-group', 'table-header-group', 'table-footer-group', 'table-row-group', 'table-cell', 'table-column', 'table-row']
       },
-      "default": 'inline',
+      "default": 'flex',
       version: 'css1'
     }
   }
@@ -850,8 +893,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/Paul/code/stylerjs/src/js/app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! /Users/Paul/code/stylerjs/src/scss/app.scss */"./src/scss/app.scss");
+__webpack_require__(/*! /Users/Paul/Code/stylerjs/src/js/app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! /Users/Paul/Code/stylerjs/src/scss/app.scss */"./src/scss/app.scss");
 
 
 /***/ })

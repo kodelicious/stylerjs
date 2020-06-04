@@ -14,15 +14,26 @@ export class StylerSelect extends StylerControl
     /**
      * Get the template for this form control.
      * 
-     * @return string
+     * @return string html
      */
     getControlTemplate() {
-        return `
+        let html = `
         <select name="${this.name}">
-            <option value="Arial">Arial</option>
-            <option value="Helvetica">Helvetica</option>
+        `
+
+        for (let i = 0; i < this.data.length; i++) {
+            const value = this.data[i]
+            const selected = this.value === value ? ' selected' : ''
+            html += `
+            <option value="${value}"${selected}>${value}</option>
+            `
+        }
+
+        html += `
         </select>
         `
+
+        return html
     }
 
     /**
