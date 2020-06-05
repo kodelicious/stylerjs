@@ -46,7 +46,7 @@ export class StylerSelect extends StylerControl
         const select = rootElement.querySelector('select')
 
         select.addEventListener('change', () => {
-            this.element.style[select.getAttribute('name')] = select.value
+            this.element.style[this.name] = select.value
         })
     }
 }

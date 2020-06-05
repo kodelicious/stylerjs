@@ -343,7 +343,7 @@ var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
 
       var input = rootElement.querySelector('input');
       input.addEventListener('change', function () {
-        _this.element.style[input.getAttribute('name')] = input.value + (_this.unit || '');
+        _this.element.style[_this.name] = input.value + (_this.unit || '');
       });
     }
   }]);
@@ -428,7 +428,7 @@ var StylerInputRange = /*#__PURE__*/function (_StylerControl) {
 
       var input = rootElement.querySelector('input');
       input.addEventListener('input', function () {
-        _this.element.style[input.getAttribute('name')] = input.value + (_this.unit || '');
+        _this.element.style[_this.name] = input.value + (_this.unit || '');
       });
     }
   }]);
@@ -513,7 +513,7 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
 
       var input = rootElement.querySelector('input');
       input.addEventListener('blur', function () {
-        _this.element.style[input.getAttribute('name')] = input.value;
+        _this.element.style[_this.name] = input.value;
       });
     }
   }]);
@@ -838,8 +838,7 @@ var StylerPanel = /*#__PURE__*/function () {
 
           if (control) {
             // get value of the element's property
-            var style = window.getComputedStyle(element, null);
-            var value = style[property.javascript] || property["default"];
+            var value = this.propertyValue(element, propertyKey, property);
             console.log(value);
             control.setElement(element);
             control.setLabel(property.label);
@@ -855,6 +854,69 @@ var StylerPanel = /*#__PURE__*/function () {
       }
 
       document.body.appendChild(panel);
+    }
+    /**
+     * Get the set value of the passed property.
+     * 
+     * @param  HTMLElement element
+     * @param  string propertyKey
+     * @param  object property
+     * @return any value
+     */
+
+  }, {
+    key: "propertyValue",
+    value: function propertyValue(element, propertyKey, property) {
+      // first check if style is set by user
+      var value = element.style[propertyKey] || undefined; // otherwise check the computed style
+
+      if (!value) {
+        var style = window.getComputedStyle(element, null);
+        value = style[property.javascript] || property["default"];
+      } // check the stylesheets???
+      //.....
+      // strip the unit when present
+
+
+      if (value && property.unit) {
+        value = value.replace(property.unit, '');
+      }
+
+      return value;
+    }
+    /**
+     * Get the set style.
+     * 
+     * @param  HTMLElement element
+     * @param  string property
+     * @return void
+     */
+
+  }, {
+    key: "style",
+    value: function style(element, property) {
+      var proto = Element.prototype;
+      var slice = Function.call.bind(Array.prototype.slice);
+      var matches = Function.call.bind(proto.matchesSelector || proto.mozMatchesSelector || proto.webkitMatchesSelector || proto.msMatchesSelector || proto.oMatchesSelector); // returns true if a DOM Element matches a cssRule
+
+      var elementMatchCSSRule = function elementMatchCSSRule(element, cssRule) {
+        return matches(element, cssRule.selectorText);
+      }; // returns true if a property is defined in a cssRule
+
+
+      var propertyInCSSRule = function propertyInCSSRule(prop, cssRule) {
+        return prop in cssRule.style && cssRule.style[prop] !== "";
+      }; // here we get the cssRules across all the stylesheets in one array
+
+
+      var cssRules = slice(document.styleSheets).reduce(function (rules, styleSheet) {
+        return rules.concat(slice(styleSheet.cssRules));
+      }, []); // get only the css rules that matches that element
+
+      var elementRules = cssRules.filter(elementMatchCSSRule.bind(null, element)); // check if the property "width" is in one of those rules
+
+      var hasProperty = elementRules.some(propertyInCSSRule.bind(null, property));
+      console.log(hasProperty);
     }
   }]);
 
@@ -947,7 +1009,7 @@ var StylerSelect = /*#__PURE__*/function (_StylerControl) {
 
       var select = rootElement.querySelector('select');
       select.addEventListener('change', function () {
-        _this.element.style[select.getAttribute('name')] = select.value;
+        _this.element.style[_this.name] = select.value;
       });
     }
   }]);

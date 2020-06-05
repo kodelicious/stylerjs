@@ -32,7 +32,7 @@ export class StylerInputNumber extends StylerControl
         const input = rootElement.querySelector('input')
         
         input.addEventListener('change', () => {
-            this.element.style[input.getAttribute('name')] = input.value + (this.unit || '')
+            this.element.style[this.name] = input.value + (this.unit || '')
         })
     }
 }

@@ -32,7 +32,7 @@ export class StylerInputText extends StylerControl
         const input = rootElement.querySelector('input')
 
         input.addEventListener('blur', () => {
-            this.element.style[input.getAttribute('name')] = input.value
+            this.element.style[this.name] = input.value
         })
     }
 }
