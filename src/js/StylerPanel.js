@@ -67,7 +67,7 @@ export class StylerPanel
                 if (control) {
                     // get value of the element's property
                     const value = this.propertyValue(element, propertyKey, property)
-                    console.log(value);
+                    console.log(propertyKey+': '+value);
                     
                     control.setElement(element)
                     control.setLabel(property.label)

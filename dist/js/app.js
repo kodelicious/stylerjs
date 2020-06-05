@@ -839,7 +839,7 @@ var StylerPanel = /*#__PURE__*/function () {
           if (control) {
             // get value of the element's property
             var value = this.propertyValue(element, propertyKey, property);
-            console.log(value);
+            console.log(propertyKey + ': ' + value);
             control.setElement(element);
             control.setLabel(property.label);
             control.setName(propertyKey);
