@@ -353,6 +353,91 @@ var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
 
 /***/ }),
 
+/***/ "./src/js/StylerInputRange.js":
+/*!************************************!*\
+  !*** ./src/js/StylerInputRange.js ***!
+  \************************************/
+/*! exports provided: StylerInputRange */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerInputRange", function() { return StylerInputRange; });
+/* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+var StylerInputRange = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerInputRange, _StylerControl);
+
+  var _super = _createSuper(StylerInputRange);
+
+  /**
+   * Construct the class.
+   * 
+   * @param
+   */
+  function StylerInputRange() {
+    _classCallCheck(this, StylerInputRange);
+
+    return _super.call(this);
+  }
+  /**
+   * Get the template for this form control.
+   * 
+   * @return string
+   */
+
+
+  _createClass(StylerInputRange, [{
+    key: "getControlTemplate",
+    value: function getControlTemplate() {
+      return "\n        <input type=\"range\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\"").concat(this.attributes, " />\n        ");
+    }
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+
+  }, {
+    key: "setEvents",
+    value: function setEvents(rootElement) {
+      var _this = this;
+
+      var input = rootElement.querySelector('input');
+      input.addEventListener('input', function () {
+        _this.element.style[input.getAttribute('name')] = input.value + (_this.unit || '');
+      });
+    }
+  }]);
+
+  return StylerInputRange;
+}(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
+
+/***/ }),
+
 /***/ "./src/js/StylerInputText.js":
 /*!***********************************!*\
   !*** ./src/js/StylerInputText.js ***!
@@ -669,12 +754,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _allowed_properties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allowed-properties */ "./src/js/allowed-properties.js");
 /* harmony import */ var _StylerInputText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerInputText */ "./src/js/StylerInputText.js");
 /* harmony import */ var _StylerInputNumber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StylerInputNumber */ "./src/js/StylerInputNumber.js");
-/* harmony import */ var _StylerSelect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StylerSelect */ "./src/js/StylerSelect.js");
+/* harmony import */ var _StylerInputRange__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StylerInputRange */ "./src/js/StylerInputRange.js");
+/* harmony import */ var _StylerSelect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./StylerSelect */ "./src/js/StylerSelect.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -740,16 +827,24 @@ var StylerPanel = /*#__PURE__*/function () {
               control = new _StylerInputNumber__WEBPACK_IMPORTED_MODULE_2__["StylerInputNumber"]();
               break;
 
+            case 'input-range':
+              control = new _StylerInputRange__WEBPACK_IMPORTED_MODULE_3__["StylerInputRange"]();
+              break;
+
             case 'select':
-              control = new _StylerSelect__WEBPACK_IMPORTED_MODULE_3__["StylerSelect"]();
+              control = new _StylerSelect__WEBPACK_IMPORTED_MODULE_4__["StylerSelect"]();
               break;
           }
 
           if (control) {
+            // get value of the element's property
+            var style = window.getComputedStyle(element, null);
+            var value = style[property.javascript] || property["default"];
+            console.log(value);
             control.setElement(element);
             control.setLabel(property.label);
             control.setName(propertyKey);
-            control.setValue(property["default"]);
+            control.setValue(value || '');
             control.setUnit(property.unit || '');
             control.setAttributes(property.attributes || {});
             control.setData(property.data ? property.data.basic : []);
@@ -887,7 +982,7 @@ __webpack_require__.r(__webpack_exports__);
     'padding': {
       label: 'Padding',
       javascript: 'padding',
-      type: 'input-number',
+      type: 'input-range',
       unit: 'rem',
       "default": 0,
       attributes: {
@@ -900,12 +995,24 @@ __webpack_require__.r(__webpack_exports__);
     'margin': {
       label: 'Margin',
       javascript: 'margin',
-      type: 'input-number',
+      type: 'input-range',
       unit: 'rem',
       "default": 0,
       attributes: {
         min: 0,
         max: 10,
+        step: 0.125
+      },
+      version: 'css1'
+    },
+    'width': {
+      label: 'Width',
+      javascript: 'width',
+      type: 'input-number',
+      unit: 'rem',
+      "default": 0,
+      attributes: {
+        min: 0,
         step: 0.125
       },
       version: 'css1'

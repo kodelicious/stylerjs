@@ -34,7 +34,7 @@ export default {
         'padding': {
             label: 'Padding',
             javascript: 'padding',
-            type: 'input-number',
+            type: 'input-range',
             unit: 'rem',
             default: 0,
             attributes: {
@@ -47,12 +47,24 @@ export default {
         'margin': {
             label: 'Margin',
             javascript: 'margin',
-            type: 'input-number',
+            type: 'input-range',
             unit: 'rem',
             default: 0,
             attributes: {
                 min: 0,
                 max: 10,
+                step: 0.125,
+            },
+            version: 'css1'
+        },
+        'width': {
+            label: 'Width',
+            javascript: 'width',
+            type: 'input-number',
+            unit: 'rem',
+            default: 0,
+            attributes: {
+                min: 0,
                 step: 0.125,
             },
             version: 'css1'

@@ -1,6 +1,7 @@
 import allowedProperties from './allowed-properties'
 import { StylerInputText } from './StylerInputText'
 import { StylerInputNumber } from './StylerInputNumber'
+import { StylerInputRange } from './StylerInputRange'
 import { StylerSelect } from './StylerSelect'
 
 export class StylerPanel
@@ -55,16 +56,24 @@ export class StylerPanel
                     case 'input-number': 
                         control = new StylerInputNumber
                     break;
+                    case 'input-range': 
+                        control = new StylerInputRange
+                    break;
                     case 'select': 
                         control = new StylerSelect
                     break;
                 }
 
                 if (control) {
+                    // get value of the element's property
+                    const style = window.getComputedStyle(element, null)
+                    const value = style[property.javascript] || property.default
+console.log(value);
+
                     control.setElement(element)
                     control.setLabel(property.label)
                     control.setName(propertyKey)
-                    control.setValue(property.default)
+                    control.setValue(value || '')
                     control.setUnit(property.unit || '')
                     control.setAttributes(property.attributes || {})
                     control.setData(property.data ? property.data.basic : [])
