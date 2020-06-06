@@ -1155,7 +1155,7 @@ var StylerColorPicker = /*#__PURE__*/function (_StylerControl) {
   _createClass(StylerColorPicker, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      return "\n        <button>Pick Color</button>\n        ";
+      return "\n        <div class=\"sjs-form-control sjs-form-control-color-picker\">\n            <div class=\"sjs-form-control-group\">\n                <div class=\"sjs-form-control-prepend\" style=\"background-colorx: #".concat(this.value, "\"></div>\n                <div class=\"sjs-form-control-text\">").concat(this.value, "</div>\n            </div>\n        </div>\n        ");
     }
     /**
      * Set events on elements in the template.
@@ -1170,11 +1170,12 @@ var StylerColorPicker = /*#__PURE__*/function (_StylerControl) {
       var _this = this;
 
       new vanilla_picker__WEBPACK_IMPORTED_MODULE_1__["default"]({
-        parent: rootElement.querySelector('button'),
+        parent: rootElement.querySelector('.sjs-form-control'),
         alpha: false,
         color: this.value,
         onChange: function onChange(color) {
           _this.element.style[_this.name] = color.rgbaString;
+          rootElement.querySelector('.sjs-form-control-text').innerHTML = '#' + color.rgbaString;
         }
       });
     }
@@ -1326,7 +1327,7 @@ var StylerControl = /*#__PURE__*/function () {
   }, {
     key: "getTemplate",
     value: function getTemplate() {
-      return "\n        <div class=\"sjs-form-group\">\n            <div class=\"sjs-form-label\">\n                ".concat(this.label, "\n            </div>\n            <div class=\"sjs-form-control\">\n                ").concat(this.getControlTemplate(), "\n            </div>\n        </div>\n        ");
+      return "\n        <div class=\"sjs-form-group\">\n            <div class=\"sjs-form-label\">\n                ".concat(this.label, "\n            </div>\n            <div class=\"sjs-form-control-wrapper\">\n                ").concat(this.getControlTemplate(), "\n            </div>\n        </div>\n        ");
     }
     /**
      * Get the template for this form control.
@@ -1426,7 +1427,7 @@ var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
   _createClass(StylerInputNumber, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      return "\n        <input type=\"number\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\"").concat(this.attributes, " />\n        ");
+      return "\n        <input type=\"number\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
     }
     /**
      * Set events on elements in the template.
@@ -1440,7 +1441,7 @@ var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
     value: function setEvents(rootElement) {
       var _this = this;
 
-      var input = rootElement.querySelector('input');
+      var input = rootElement.querySelector('.sjs-form-control');
       input.addEventListener('change', function () {
         _this.element.style[_this.name] = input.value + (_this.unit || '');
       });
@@ -1511,7 +1512,7 @@ var StylerInputRange = /*#__PURE__*/function (_StylerControl) {
   _createClass(StylerInputRange, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      return "\n        <input type=\"range\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\"").concat(this.attributes, " />\n        ");
+      return "\n        <input type=\"range\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
     }
     /**
      * Set events on elements in the template.
@@ -1525,7 +1526,7 @@ var StylerInputRange = /*#__PURE__*/function (_StylerControl) {
     value: function setEvents(rootElement) {
       var _this = this;
 
-      var input = rootElement.querySelector('input');
+      var input = rootElement.querySelector('.sjs-form-control');
       input.addEventListener('input', function () {
         _this.element.style[_this.name] = input.value + (_this.unit || '');
       });
@@ -1596,7 +1597,7 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
   _createClass(StylerInputText, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      return "\n        <input type=\"text\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\"").concat(this.attributes, " />\n        ");
+      return "\n        <input type=\"text\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
     }
     /**
      * Set events on elements in the template.
@@ -1610,7 +1611,7 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
     value: function setEvents(rootElement) {
       var _this = this;
 
-      var input = rootElement.querySelector('input');
+      var input = rootElement.querySelector('.sjs-form-control');
       input.addEventListener('blur', function () {
         _this.element.style[_this.name] = input.value;
       });
@@ -1980,11 +1981,12 @@ var StylerPanel = /*#__PURE__*/function () {
         value = style[property.javascript] || property["default"];
       } // check the stylesheets???
       //.....
-      // strip the unit when present
+      // strip all available units
 
 
       if (value && property.unit) {
-        value = value.replace(property.unit, '');
+        // value = value.replace(property.unit, '')
+        value = value.replace(/(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax)/g, '');
       }
 
       return value;
@@ -2089,7 +2091,7 @@ var StylerSelect = /*#__PURE__*/function (_StylerControl) {
   _createClass(StylerSelect, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
-      var html = "\n        <select name=\"".concat(this.name, "\"").concat(this.attributes, ">\n        ");
+      var html = "\n        <select name=\"".concat(this.name, "\" class=\"sjs-form-control\"").concat(this.attributes, ">\n        ");
 
       for (var i = 0; i < this.data.length; i++) {
         var value = this.data[i];
@@ -2112,7 +2114,7 @@ var StylerSelect = /*#__PURE__*/function (_StylerControl) {
     value: function setEvents(rootElement) {
       var _this = this;
 
-      var select = rootElement.querySelector('select');
+      var select = rootElement.querySelector('.sjs-form-control');
       select.addEventListener('change', function () {
         _this.element.style[_this.name] = select.value;
       });
@@ -2173,7 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
       version: 'css1'
     },
     'color': {
-      label: 'color',
+      label: 'Color',
       javascript: 'color',
       type: 'color-picker',
       "default": '#000000',

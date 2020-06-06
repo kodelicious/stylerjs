@@ -19,7 +19,12 @@ export class StylerColorPicker extends StylerControl
      */
     getControlTemplate() {
         return `
-        <button>Pick Color</button>
+        <div class="sjs-form-control sjs-form-control-color-picker">
+            <div class="sjs-form-control-group">
+                <div class="sjs-form-control-prepend" style="background-colorx: #${this.value}"></div>
+                <div class="sjs-form-control-text">${this.value}</div>
+            </div>
+        </div>
         `
     }
 
@@ -31,11 +36,12 @@ export class StylerColorPicker extends StylerControl
      */
     setEvents(rootElement) {
         new Picker({
-            parent: rootElement.querySelector('button'),
+            parent: rootElement.querySelector('.sjs-form-control'),
             alpha: false,
             color: this.value,
             onChange: (color) => {
-                this.element.style[this.name] = color.rgbaString;
+                this.element.style[this.name] = color.rgbaString
+                rootElement.querySelector('.sjs-form-control-text').innerHTML = '#'+color.rgbaString
             },
         })
     }

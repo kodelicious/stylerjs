@@ -18,7 +18,7 @@ export class StylerSelect extends StylerControl
      */
     getControlTemplate() {
         let html = `
-        <select name="${this.name}"${this.attributes}>
+        <select name="${this.name}" class="sjs-form-control"${this.attributes}>
         `
 
         for (let i = 0; i < this.data.length; i++) {
@@ -43,7 +43,7 @@ export class StylerSelect extends StylerControl
      * @return void
      */
     setEvents(rootElement) {
-        const select = rootElement.querySelector('select')
+        const select = rootElement.querySelector('.sjs-form-control')
 
         select.addEventListener('change', () => {
             this.element.style[this.name] = select.value

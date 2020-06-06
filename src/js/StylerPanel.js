@@ -110,9 +110,10 @@ export class StylerPanel
         // check the stylesheets???
         //.....
 
-        // strip the unit when present
+        // strip all available units
         if (value && property.unit) {
-            value = value.replace(property.unit, '')
+            // value = value.replace(property.unit, '')
+            value = value.replace(/(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax)/g, '')
         }
 
         return value

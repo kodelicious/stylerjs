@@ -58,7 +58,7 @@ export default {
             version: 'css1'
         },
         'color': {
-            label: 'color',
+            label: 'Color',
             javascript: 'color',
             type: 'color-picker',
             default: '#000000',

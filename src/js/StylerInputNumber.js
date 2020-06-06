@@ -18,7 +18,7 @@ export class StylerInputNumber extends StylerControl
      */
     getControlTemplate() {
         return `
-        <input type="number" name="${this.name}" value="${this.value}"${this.attributes} />
+        <input type="number" name="${this.name}" value="${this.value}" class="sjs-form-control"${this.attributes} />
         `
     }
 
@@ -29,7 +29,7 @@ export class StylerInputNumber extends StylerControl
      * @return void
      */
     setEvents(rootElement) {
-        const input = rootElement.querySelector('input')
+        const input = rootElement.querySelector('.sjs-form-control')
         
         input.addEventListener('change', () => {
             this.element.style[this.name] = input.value + (this.unit || '')
