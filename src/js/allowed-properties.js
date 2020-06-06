@@ -64,9 +64,33 @@ export default {
             default: '#000000',
             version: 'css1'
         },
+        'font-size': {
+            label: 'Font size',
+            javascript: 'fontSize',
+            type: 'input-range',
+            unit: 'rem',
+            attributes: {
+                min: 0,
+                max: 10,
+                step: 0.125,
+            },
+            version: 'css1'
+        },
         'width': {
             label: 'Width',
             javascript: 'width',
+            type: 'input-number',
+            unit: 'rem',
+            default: 0,
+            attributes: {
+                min: 0,
+                step: 0.125,
+            },
+            version: 'css1'
+        },
+        'height': {
+            label: 'Height',
+            javascript: 'height',
             type: 'input-number',
             unit: 'rem',
             default: 0,
