@@ -1,6 +1,6 @@
 import { StylerControl } from './StylerControl'
 
-export class StylerInputRange extends StylerControl
+export class StylerControlRange extends StylerControl
 {
     /**
      * Construct the class.

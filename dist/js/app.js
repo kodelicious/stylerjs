@@ -1094,98 +1094,6 @@ var Picker = function () {
 
 /***/ }),
 
-/***/ "./src/js/StylerColorPicker.js":
-/*!*************************************!*\
-  !*** ./src/js/StylerColorPicker.js ***!
-  \*************************************/
-/*! exports provided: StylerColorPicker */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerColorPicker", function() { return StylerColorPicker; });
-/* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
-/* harmony import */ var vanilla_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vanilla-picker */ "./node_modules/vanilla-picker/dist/vanilla-picker.mjs");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var StylerColorPicker = /*#__PURE__*/function (_StylerControl) {
-  _inherits(StylerColorPicker, _StylerControl);
-
-  var _super = _createSuper(StylerColorPicker);
-
-  /**
-   * Construct the class.
-   * 
-   * @param
-   */
-  function StylerColorPicker() {
-    _classCallCheck(this, StylerColorPicker);
-
-    return _super.call(this);
-  }
-  /**
-   * Get the template for this form control.
-   * 
-   * @return string
-   */
-
-
-  _createClass(StylerColorPicker, [{
-    key: "getControlTemplate",
-    value: function getControlTemplate() {
-      return "\n        <div class=\"sjs-form-control sjs-form-control-color-picker\">\n            <div class=\"sjs-form-control-group\">\n                <div class=\"sjs-form-control-prepend\" style=\"background-colorx: #".concat(this.value, "\"></div>\n                <div class=\"sjs-form-control-text\">").concat(this.value, "</div>\n            </div>\n        </div>\n        ");
-    }
-    /**
-     * Set events on elements in the template.
-     * 
-     * @param  HTMLDivElement rootElement
-     * @return void
-     */
-
-  }, {
-    key: "setEvents",
-    value: function setEvents(rootElement) {
-      var _this = this;
-
-      new vanilla_picker__WEBPACK_IMPORTED_MODULE_1__["default"]({
-        parent: rootElement.querySelector('.sjs-form-control'),
-        alpha: false,
-        color: this.value,
-        onChange: function onChange(color) {
-          _this.element.style[_this.name] = color.rgbaString;
-          rootElement.querySelector('.sjs-form-control-text').innerHTML = '#' + color.rgbaString;
-        }
-      });
-    }
-  }]);
-
-  return StylerColorPicker;
-}(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
-
-/***/ }),
-
 /***/ "./src/js/StylerControl.js":
 /*!*********************************!*\
   !*** ./src/js/StylerControl.js ***!
@@ -1327,7 +1235,7 @@ var StylerControl = /*#__PURE__*/function () {
   }, {
     key: "getTemplate",
     value: function getTemplate() {
-      return "\n        <div class=\"sjs-form-group\">\n            <div class=\"sjs-form-label\">\n                ".concat(this.label, "\n            </div>\n            <div class=\"sjs-form-control-wrapper\">\n                ").concat(this.getControlTemplate(), "\n            </div>\n        </div>\n        ");
+      return "\n        <div class=\"sjs-form-group\">\n            <div class=\"sjs-form-label\">".concat(this.label, "</div>\n            <div class=\"sjs-form-control-wrapper\">\n                ").concat(this.getControlTemplate(), "\n            </div>\n        </div>\n        ");
     }
     /**
      * Get the template for this form control.
@@ -1368,16 +1276,202 @@ var StylerControl = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/js/StylerInputNumber.js":
-/*!*************************************!*\
-  !*** ./src/js/StylerInputNumber.js ***!
-  \*************************************/
-/*! exports provided: StylerInputNumber */
+/***/ "./src/js/StylerControlColorPicker.js":
+/*!********************************************!*\
+  !*** ./src/js/StylerControlColorPicker.js ***!
+  \********************************************/
+/*! exports provided: StylerControlColorPicker */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerInputNumber", function() { return StylerInputNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerControlColorPicker", function() { return StylerControlColorPicker; });
+/* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
+/* harmony import */ var vanilla_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vanilla-picker */ "./node_modules/vanilla-picker/dist/vanilla-picker.mjs");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var StylerControlColorPicker = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerControlColorPicker, _StylerControl);
+
+  var _super = _createSuper(StylerControlColorPicker);
+
+  /**
+   * Construct the class.
+   * 
+   * @param
+   */
+  function StylerControlColorPicker() {
+    _classCallCheck(this, StylerControlColorPicker);
+
+    return _super.call(this);
+  }
+  /**
+   * Get the template for this form control.
+   * 
+   * @return string
+   */
+
+
+  _createClass(StylerControlColorPicker, [{
+    key: "getControlTemplate",
+    value: function getControlTemplate() {
+      return "\n        <div class=\"sjs-form-control sjs-form-control-color-picker\">\n            <div class=\"sjs-form-control-group\">\n                <div class=\"sjs-form-control-prepend\" style=\"background-color: ".concat(this.value, "\"></div>\n                <div class=\"sjs-form-control-text\">").concat(this.value, "</div>\n            </div>\n        </div>\n        ");
+    }
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+
+  }, {
+    key: "setEvents",
+    value: function setEvents(rootElement) {
+      var _this = this;
+
+      new vanilla_picker__WEBPACK_IMPORTED_MODULE_1__["default"]({
+        parent: rootElement.querySelector('.sjs-form-control'),
+        alpha: false,
+        color: this.value,
+        popup: 'left',
+        onChange: function onChange(color) {
+          _this.element.style[_this.name] = color.rgbaString;
+          rootElement.querySelector('.sjs-form-control-text').innerHTML = color.rgbaString;
+        }
+      });
+    }
+  }]);
+
+  return StylerControlColorPicker;
+}(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
+
+/***/ }),
+
+/***/ "./src/js/StylerControlHeading.js":
+/*!****************************************!*\
+  !*** ./src/js/StylerControlHeading.js ***!
+  \****************************************/
+/*! exports provided: StylerControlHeading */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerControlHeading", function() { return StylerControlHeading; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var StylerControlHeading = /*#__PURE__*/function () {
+  /**
+   * Construct the class.
+   * 
+   * @param
+   */
+  function StylerControlHeading() {
+    _classCallCheck(this, StylerControlHeading);
+
+    this.label = 'My Group';
+  }
+  /**
+   * Set panel element for injecting the template.
+   * 
+   * @param  HTMLDivElement panel
+   * @return void
+   */
+
+
+  _createClass(StylerControlHeading, [{
+    key: "setPanel",
+    value: function setPanel(panel) {
+      this.panel = panel;
+    }
+    /**
+     * Set label for the template.
+     * 
+     * @param  string label
+     * @return void
+     */
+
+  }, {
+    key: "setLabel",
+    value: function setLabel(label) {
+      this.label = label;
+    }
+    /**
+     * Get the template for this form control.
+     * 
+     * @return string
+     */
+
+  }, {
+    key: "getTemplate",
+    value: function getTemplate() {
+      return "\n        <div class=\"sjs-form-heading\">".concat(this.label, "</div>\n        ");
+    }
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+
+  }, {
+    key: "setEvents",
+    value: function setEvents(rootElement) {}
+    /**
+     * Set events on elements in the template
+     * 
+     * @return void
+     */
+
+  }, {
+    key: "build",
+    value: function build() {
+      var rootElement = document.createRange().createContextualFragment(this.getTemplate()).querySelector('div');
+      this.setEvents(rootElement);
+      this.panel.appendChild(rootElement);
+    }
+  }]);
+
+  return StylerControlHeading;
+}();
+
+/***/ }),
+
+/***/ "./src/js/StylerControlNumber.js":
+/*!***************************************!*\
+  !*** ./src/js/StylerControlNumber.js ***!
+  \***************************************/
+/*! exports provided: StylerControlNumber */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerControlNumber", function() { return StylerControlNumber; });
 /* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1402,18 +1496,18 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
-var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
-  _inherits(StylerInputNumber, _StylerControl);
+var StylerControlNumber = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerControlNumber, _StylerControl);
 
-  var _super = _createSuper(StylerInputNumber);
+  var _super = _createSuper(StylerControlNumber);
 
   /**
    * Construct the class.
    * 
    * @param
    */
-  function StylerInputNumber() {
-    _classCallCheck(this, StylerInputNumber);
+  function StylerControlNumber() {
+    _classCallCheck(this, StylerControlNumber);
 
     return _super.call(this);
   }
@@ -1424,7 +1518,7 @@ var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
    */
 
 
-  _createClass(StylerInputNumber, [{
+  _createClass(StylerControlNumber, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
       return "\n        <input type=\"number\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
@@ -1448,21 +1542,21 @@ var StylerInputNumber = /*#__PURE__*/function (_StylerControl) {
     }
   }]);
 
-  return StylerInputNumber;
+  return StylerControlNumber;
 }(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
 
 /***/ }),
 
-/***/ "./src/js/StylerInputRange.js":
-/*!************************************!*\
-  !*** ./src/js/StylerInputRange.js ***!
-  \************************************/
-/*! exports provided: StylerInputRange */
+/***/ "./src/js/StylerControlRange.js":
+/*!**************************************!*\
+  !*** ./src/js/StylerControlRange.js ***!
+  \**************************************/
+/*! exports provided: StylerControlRange */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerInputRange", function() { return StylerInputRange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerControlRange", function() { return StylerControlRange; });
 /* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1487,18 +1581,18 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
-var StylerInputRange = /*#__PURE__*/function (_StylerControl) {
-  _inherits(StylerInputRange, _StylerControl);
+var StylerControlRange = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerControlRange, _StylerControl);
 
-  var _super = _createSuper(StylerInputRange);
+  var _super = _createSuper(StylerControlRange);
 
   /**
    * Construct the class.
    * 
    * @param
    */
-  function StylerInputRange() {
-    _classCallCheck(this, StylerInputRange);
+  function StylerControlRange() {
+    _classCallCheck(this, StylerControlRange);
 
     return _super.call(this);
   }
@@ -1509,7 +1603,7 @@ var StylerInputRange = /*#__PURE__*/function (_StylerControl) {
    */
 
 
-  _createClass(StylerInputRange, [{
+  _createClass(StylerControlRange, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
       return "\n        <input type=\"range\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
@@ -1533,21 +1627,21 @@ var StylerInputRange = /*#__PURE__*/function (_StylerControl) {
     }
   }]);
 
-  return StylerInputRange;
+  return StylerControlRange;
 }(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
 
 /***/ }),
 
-/***/ "./src/js/StylerInputText.js":
-/*!***********************************!*\
-  !*** ./src/js/StylerInputText.js ***!
-  \***********************************/
-/*! exports provided: StylerInputText */
+/***/ "./src/js/StylerControlSelect.js":
+/*!***************************************!*\
+  !*** ./src/js/StylerControlSelect.js ***!
+  \***************************************/
+/*! exports provided: StylerControlSelect */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerInputText", function() { return StylerInputText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerControlSelect", function() { return StylerControlSelect; });
 /* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1572,18 +1666,112 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
-var StylerInputText = /*#__PURE__*/function (_StylerControl) {
-  _inherits(StylerInputText, _StylerControl);
+var StylerControlSelect = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerControlSelect, _StylerControl);
 
-  var _super = _createSuper(StylerInputText);
+  var _super = _createSuper(StylerControlSelect);
 
   /**
    * Construct the class.
    * 
    * @param
    */
-  function StylerInputText() {
-    _classCallCheck(this, StylerInputText);
+  function StylerControlSelect() {
+    _classCallCheck(this, StylerControlSelect);
+
+    return _super.call(this);
+  }
+  /**
+   * Get the template for this form control.
+   * 
+   * @return string html
+   */
+
+
+  _createClass(StylerControlSelect, [{
+    key: "getControlTemplate",
+    value: function getControlTemplate() {
+      var html = "\n        <select name=\"".concat(this.name, "\" class=\"sjs-form-control\"").concat(this.attributes, ">\n        ");
+
+      for (var i = 0; i < this.data.length; i++) {
+        var value = this.data[i];
+        var selected = this.value === value ? ' selected' : '';
+        html += "\n            <option value=\"".concat(value, "\"").concat(selected, ">").concat(value, "</option>\n            ");
+      }
+
+      html += "\n        </select>\n        ";
+      return html;
+    }
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+
+  }, {
+    key: "setEvents",
+    value: function setEvents(rootElement) {
+      var _this = this;
+
+      var select = rootElement.querySelector('.sjs-form-control');
+      select.addEventListener('change', function () {
+        _this.element.style[_this.name] = select.value;
+      });
+    }
+  }]);
+
+  return StylerControlSelect;
+}(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
+
+/***/ }),
+
+/***/ "./src/js/StylerControlText.js":
+/*!*************************************!*\
+  !*** ./src/js/StylerControlText.js ***!
+  \*************************************/
+/*! exports provided: StylerControlText */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerControlText", function() { return StylerControlText; });
+/* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+var StylerControlText = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerControlText, _StylerControl);
+
+  var _super = _createSuper(StylerControlText);
+
+  /**
+   * Construct the class.
+   * 
+   * @param
+   */
+  function StylerControlText() {
+    _classCallCheck(this, StylerControlText);
 
     return _super.call(this);
   }
@@ -1594,7 +1782,7 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
    */
 
 
-  _createClass(StylerInputText, [{
+  _createClass(StylerControlText, [{
     key: "getControlTemplate",
     value: function getControlTemplate() {
       return "\n        <input type=\"text\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
@@ -1618,7 +1806,7 @@ var StylerInputText = /*#__PURE__*/function (_StylerControl) {
     }
   }]);
 
-  return StylerInputText;
+  return StylerControlText;
 }(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
 
 /***/ }),
@@ -1852,16 +2040,18 @@ var StylerJS = /*#__PURE__*/function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerPanel", function() { return StylerPanel; });
 /* harmony import */ var _allowed_properties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allowed-properties */ "./src/js/allowed-properties.js");
-/* harmony import */ var _StylerColorPicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerColorPicker */ "./src/js/StylerColorPicker.js");
-/* harmony import */ var _StylerInputText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StylerInputText */ "./src/js/StylerInputText.js");
-/* harmony import */ var _StylerInputNumber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StylerInputNumber */ "./src/js/StylerInputNumber.js");
-/* harmony import */ var _StylerInputRange__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./StylerInputRange */ "./src/js/StylerInputRange.js");
-/* harmony import */ var _StylerSelect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./StylerSelect */ "./src/js/StylerSelect.js");
+/* harmony import */ var _StylerControlColorPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StylerControlColorPicker */ "./src/js/StylerControlColorPicker.js");
+/* harmony import */ var _StylerControlHeading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StylerControlHeading */ "./src/js/StylerControlHeading.js");
+/* harmony import */ var _StylerControlNumber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./StylerControlNumber */ "./src/js/StylerControlNumber.js");
+/* harmony import */ var _StylerControlSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./StylerControlSelect */ "./src/js/StylerControlSelect.js");
+/* harmony import */ var _StylerControlRange__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./StylerControlRange */ "./src/js/StylerControlRange.js");
+/* harmony import */ var _StylerControlText__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./StylerControlText */ "./src/js/StylerControlText.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -1914,6 +2104,10 @@ var StylerPanel = /*#__PURE__*/function () {
       }); // loop through all allowed groups and properties
 
       for (var groupKey in _allowed_properties__WEBPACK_IMPORTED_MODULE_0__["default"]) {
+        var group = new _StylerControlHeading__WEBPACK_IMPORTED_MODULE_3__["StylerControlHeading"]();
+        group.setPanel(panel);
+        group.setLabel(groupKey);
+        group.build();
         var properties = _allowed_properties__WEBPACK_IMPORTED_MODULE_0__["default"][groupKey];
 
         for (var propertyKey in properties) {
@@ -1922,23 +2116,23 @@ var StylerPanel = /*#__PURE__*/function () {
 
           switch (property.type) {
             case 'input-text':
-              control = new _StylerInputText__WEBPACK_IMPORTED_MODULE_2__["StylerInputText"]();
+              control = new _StylerControlText__WEBPACK_IMPORTED_MODULE_6__["StylerControlText"]();
               break;
 
             case 'color-picker':
-              control = new _StylerColorPicker__WEBPACK_IMPORTED_MODULE_1__["StylerColorPicker"]();
+              control = new _StylerControlColorPicker__WEBPACK_IMPORTED_MODULE_2__["StylerControlColorPicker"]();
               break;
 
             case 'input-number':
-              control = new _StylerInputNumber__WEBPACK_IMPORTED_MODULE_3__["StylerInputNumber"]();
+              control = new _StylerControlNumber__WEBPACK_IMPORTED_MODULE_4__["StylerControlNumber"]();
               break;
 
             case 'input-range':
-              control = new _StylerInputRange__WEBPACK_IMPORTED_MODULE_4__["StylerInputRange"]();
+              control = new _StylerControlRange__WEBPACK_IMPORTED_MODULE_5__["StylerControlRange"]();
               break;
 
             case 'select':
-              control = new _StylerSelect__WEBPACK_IMPORTED_MODULE_5__["StylerSelect"]();
+              control = new _StylerControlSelect__WEBPACK_IMPORTED_MODULE_7__["StylerControlSelect"]();
               break;
           }
 
@@ -2032,100 +2226,6 @@ var StylerPanel = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/js/StylerSelect.js":
-/*!********************************!*\
-  !*** ./src/js/StylerSelect.js ***!
-  \********************************/
-/*! exports provided: StylerSelect */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerSelect", function() { return StylerSelect; });
-/* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-var StylerSelect = /*#__PURE__*/function (_StylerControl) {
-  _inherits(StylerSelect, _StylerControl);
-
-  var _super = _createSuper(StylerSelect);
-
-  /**
-   * Construct the class.
-   * 
-   * @param
-   */
-  function StylerSelect() {
-    _classCallCheck(this, StylerSelect);
-
-    return _super.call(this);
-  }
-  /**
-   * Get the template for this form control.
-   * 
-   * @return string html
-   */
-
-
-  _createClass(StylerSelect, [{
-    key: "getControlTemplate",
-    value: function getControlTemplate() {
-      var html = "\n        <select name=\"".concat(this.name, "\" class=\"sjs-form-control\"").concat(this.attributes, ">\n        ");
-
-      for (var i = 0; i < this.data.length; i++) {
-        var value = this.data[i];
-        var selected = this.value === value ? ' selected' : '';
-        html += "\n            <option value=\"".concat(value, "\"").concat(selected, ">").concat(value, "</option>\n            ");
-      }
-
-      html += "\n        </select>\n        ";
-      return html;
-    }
-    /**
-     * Set events on elements in the template.
-     * 
-     * @param  HTMLDivElement rootElement
-     * @return void
-     */
-
-  }, {
-    key: "setEvents",
-    value: function setEvents(rootElement) {
-      var _this = this;
-
-      var select = rootElement.querySelector('.sjs-form-control');
-      select.addEventListener('change', function () {
-        _this.element.style[_this.name] = select.value;
-      });
-    }
-  }]);
-
-  return StylerSelect;
-}(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
-
-/***/ }),
-
 /***/ "./src/js/allowed-properties.js":
 /*!**************************************!*\
   !*** ./src/js/allowed-properties.js ***!
@@ -2136,7 +2236,7 @@ var StylerSelect = /*#__PURE__*/function (_StylerControl) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  layout: {
+  'Layout': {
     'display': {
       label: 'Display',
       javascript: 'display',
@@ -2174,25 +2274,6 @@ __webpack_require__.r(__webpack_exports__);
       },
       version: 'css1'
     },
-    'color': {
-      label: 'Color',
-      javascript: 'color',
-      type: 'color-picker',
-      "default": '#000000',
-      version: 'css1'
-    },
-    'font-size': {
-      label: 'Font size',
-      javascript: 'fontSize',
-      type: 'input-range',
-      unit: 'rem',
-      attributes: {
-        min: 0,
-        max: 10,
-        step: 0.125
-      },
-      version: 'css1'
-    },
     'width': {
       label: 'Width',
       javascript: 'width',
@@ -2215,6 +2296,47 @@ __webpack_require__.r(__webpack_exports__);
         min: 0,
         step: 0.125
       },
+      version: 'css1'
+    }
+  },
+  'Typography': {
+    'color': {
+      label: 'Color',
+      javascript: 'color',
+      type: 'color-picker',
+      "default": '#000000',
+      version: 'css1'
+    },
+    'font-size': {
+      label: 'Font size',
+      javascript: 'fontSize',
+      type: 'input-range',
+      unit: 'rem',
+      attributes: {
+        min: 0,
+        max: 10,
+        step: 0.125
+      },
+      version: 'css1'
+    },
+    'font-style': {
+      label: 'Font style',
+      javascript: 'fontStyle',
+      type: 'select',
+      data: {
+        basic: ['normal', 'italic', 'oblique', 'initial', 'inherit']
+      },
+      "default": 'normal',
+      version: 'css1'
+    },
+    'text-align': {
+      label: 'Text align',
+      javascript: 'textAlign',
+      type: 'select',
+      data: {
+        basic: ['left', 'right', 'center', 'justify', 'initial', 'inherit']
+      },
+      "default": 'left',
       version: 'css1'
     }
   }

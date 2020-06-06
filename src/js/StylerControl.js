@@ -105,9 +105,7 @@ export class StylerControl
     getTemplate() {
         return `
         <div class="sjs-form-group">
-            <div class="sjs-form-label">
-                ${this.label}
-            </div>
+            <div class="sjs-form-label">${this.label}</div>
             <div class="sjs-form-control-wrapper">
                 ${this.getControlTemplate()}
             </div>

@@ -1,5 +1,5 @@
 export default {
-    layout: {
+    'Layout': {
         'display': {
             label: 'Display',
             javascript: 'display',
@@ -57,25 +57,6 @@ export default {
             },
             version: 'css1'
         },
-        'color': {
-            label: 'Color',
-            javascript: 'color',
-            type: 'color-picker',
-            default: '#000000',
-            version: 'css1'
-        },
-        'font-size': {
-            label: 'Font size',
-            javascript: 'fontSize',
-            type: 'input-range',
-            unit: 'rem',
-            attributes: {
-                min: 0,
-                max: 10,
-                step: 0.125,
-            },
-            version: 'css1'
-        },
         'width': {
             label: 'Width',
             javascript: 'width',
@@ -100,7 +81,62 @@ export default {
             },
             version: 'css1'
         },
-    }
+    },
+
+    'Typography': {
+        'color': {
+            label: 'Color',
+            javascript: 'color',
+            type: 'color-picker',
+            default: '#000000',
+            version: 'css1'
+        },
+        'font-size': {
+            label: 'Font size',
+            javascript: 'fontSize',
+            type: 'input-range',
+            unit: 'rem',
+            attributes: {
+                min: 0,
+                max: 10,
+                step: 0.125,
+            },
+            version: 'css1'
+        },
+        'font-style': {
+            label: 'Font style',
+            javascript: 'fontStyle',
+            type: 'select',
+            data: {
+                basic: [
+                    'normal',
+                    'italic',
+                    'oblique',
+                    'initial',
+                    'inherit',
+                ],
+            },
+            default: 'normal',
+            version: 'css1'
+        },
+        'text-align': {
+            label: 'Text align',
+            javascript: 'textAlign',
+            type: 'select',
+            data: {
+                basic: [
+                    'left',
+                    'right',
+                    'center',
+                    'justify',
+                    'initial',
+                    'inherit',
+                ],
+            },
+            default: 'left',
+            version: 'css1'
+        },
+    },
 }
 
 /*

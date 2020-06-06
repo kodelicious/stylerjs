@@ -1,9 +1,10 @@
 import allowedProperties from './allowed-properties'
-import { StylerColorPicker } from './StylerColorPicker'
-import { StylerInputText } from './StylerInputText'
-import { StylerInputNumber } from './StylerInputNumber'
-import { StylerInputRange } from './StylerInputRange'
-import { StylerSelect } from './StylerSelect'
+import { StylerControlColorPicker } from './StylerControlColorPicker'
+import { StylerControlHeading } from './StylerControlHeading'
+import { StylerControlNumber } from './StylerControlNumber'
+import { StylerControlSelect } from './StylerControlSelect'
+import { StylerControlRange } from './StylerControlRange'
+import { StylerControlText } from './StylerControlText'
 
 export class StylerPanel
 {
@@ -45,6 +46,11 @@ export class StylerPanel
 
         // loop through all allowed groups and properties
         for (let groupKey in allowedProperties) {
+            const group = new StylerControlHeading
+            group.setPanel(panel)
+            group.setLabel(groupKey)
+            group.build()
+
             const properties = allowedProperties[groupKey]
             for (let propertyKey in properties) {
                 const property = properties[propertyKey]
@@ -52,19 +58,19 @@ export class StylerPanel
 
                 switch (property.type) {
                     case 'input-text': 
-                        control = new StylerInputText
+                        control = new StylerControlText
                     break;
                     case 'color-picker': 
-                        control = new StylerColorPicker
+                        control = new StylerControlColorPicker
                     break;
                     case 'input-number': 
-                        control = new StylerInputNumber
+                        control = new StylerControlNumber
                     break;
                     case 'input-range': 
-                        control = new StylerInputRange
+                        control = new StylerControlRange
                     break;
                     case 'select': 
-                        control = new StylerSelect
+                        control = new StylerControlSelect
                     break;
                 }
 

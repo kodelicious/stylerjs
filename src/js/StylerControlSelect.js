@@ -1,6 +1,6 @@
 import { StylerControl } from './StylerControl'
 
-export class StylerSelect extends StylerControl
+export class StylerControlSelect extends StylerControl
 {
     /**
      * Construct the class.
