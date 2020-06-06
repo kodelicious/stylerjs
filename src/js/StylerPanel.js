@@ -1,4 +1,5 @@
 import allowedProperties from './allowed-properties'
+import { StylerColorPicker } from './StylerColorPicker'
 import { StylerInputText } from './StylerInputText'
 import { StylerInputNumber } from './StylerInputNumber'
 import { StylerInputRange } from './StylerInputRange'
@@ -52,6 +53,9 @@ export class StylerPanel
                 switch (property.type) {
                     case 'input-text': 
                         control = new StylerInputText
+                    break;
+                    case 'color-picker': 
+                        control = new StylerColorPicker
                     break;
                     case 'input-number': 
                         control = new StylerInputNumber

@@ -57,6 +57,13 @@ export default {
             },
             version: 'css1'
         },
+        'color': {
+            label: 'color',
+            javascript: 'color',
+            type: 'color-picker',
+            default: '#000000',
+            version: 'css1'
+        },
         'width': {
             label: 'Width',
             javascript: 'width',
