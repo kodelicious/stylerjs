@@ -12,6 +12,16 @@ export class StylerControlRange extends StylerControl
     }
 
     /**
+     * Convert value of the control.
+     * 
+     * @param  string value
+     * @return string value
+     */
+    convertValue(value) {
+        return this.convertValueforValidUnit(value)
+    }
+
+    /**
      * Get the template for this form control.
      * 
      * @return string

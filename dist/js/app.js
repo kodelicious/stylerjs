@@ -1119,11 +1119,13 @@ var StylerControl = /*#__PURE__*/function () {
   function StylerControl() {
     _classCallCheck(this, StylerControl);
 
+    this.element = undefined;
+    this.property = undefined;
     this.label = 'My Label';
     this.name = '';
     this.value = '';
     this.attributes = '';
-    this.date = [];
+    this.data = [];
   }
   /**
    * Set element.
@@ -1137,6 +1139,18 @@ var StylerControl = /*#__PURE__*/function () {
     key: "setElement",
     value: function setElement(element) {
       this.element = element;
+    }
+    /**
+     * Set property.
+     * 
+     * @param  object property
+     * @return void
+     */
+
+  }, {
+    key: "setProperty",
+    value: function setProperty(property) {
+      this.property = property;
     }
     /**
      * Set label for the template.
@@ -1172,7 +1186,43 @@ var StylerControl = /*#__PURE__*/function () {
   }, {
     key: "setValue",
     value: function setValue(value) {
-      this.value = value;
+      this.value = this.convertValue(value);
+    }
+    /**
+     * Convert value of the control.
+     * This method will be extended.
+     * 
+     * @param  string value
+     * @return string value
+     */
+
+  }, {
+    key: "convertValue",
+    value: function convertValue(value) {
+      return value;
+    }
+    /**
+     * Convert value of the control.
+     * This method will be extended.
+     * 
+     * @param  string value
+     * @return string value
+     */
+
+  }, {
+    key: "convertValueforValidUnit",
+    value: function convertValueforValidUnit(value) {
+      if (value && this.property && this.property.unit) {
+        value = value.replace(/(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax)/g, '');
+
+        switch (this.property.unit) {
+          case 'rem':
+            value = value / 16;
+            break;
+        }
+      }
+
+      return value;
     }
     /**
      * Set unit of the control for the value.
@@ -1328,13 +1378,39 @@ var StylerControlColorPicker = /*#__PURE__*/function (_StylerControl) {
     return _super.call(this);
   }
   /**
-   * Get the template for this form control.
+   * Convert value of the control.
    * 
-   * @return string
+   * @param  string value
+   * @return string value
    */
 
 
   _createClass(StylerControlColorPicker, [{
+    key: "convertValue",
+    value: function convertValue(value) {
+      return value;
+      return this.convertRGBAToHexA(value);
+    }
+    /**
+     * Convert RGBA to HEXA.
+     * 
+     * @param  string value
+     * @return string
+     */
+
+  }, {
+    key: "convertRGBAToHexA",
+    value: function convertRGBAToHexA(value) {
+      var rgb = value.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+      return rgb && rgb.length === 4 ? "#" + ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+    }
+    /**
+     * Get the template for this form control.
+     * 
+     * @return string
+     */
+
+  }, {
     key: "getControlTemplate",
     value: function getControlTemplate() {
       return "\n        <div class=\"sjs-form-control sjs-form-control-color-picker\">\n            <div class=\"sjs-form-control-group\">\n                <div class=\"sjs-form-control-prepend\" style=\"background-color: ".concat(this.value, "\"></div>\n                <div class=\"sjs-form-control-text\">").concat(this.value, "</div>\n            </div>\n        </div>\n        ");
@@ -1357,8 +1433,9 @@ var StylerControlColorPicker = /*#__PURE__*/function (_StylerControl) {
         color: this.value,
         popup: 'left',
         onChange: function onChange(color) {
-          _this.element.style[_this.name] = color.rgbaString;
-          rootElement.querySelector('.sjs-form-control-text').innerHTML = color.rgbaString;
+          var hex = color.hex.substr(0, 7);
+          _this.element.style[_this.name] = hex;
+          rootElement.querySelector('.sjs-form-control-text').innerHTML = hex;
         }
       });
     }
@@ -1512,13 +1589,25 @@ var StylerControlNumber = /*#__PURE__*/function (_StylerControl) {
     return _super.call(this);
   }
   /**
-   * Get the template for this form control.
+   * Convert value of the control.
    * 
-   * @return string
+   * @param  string value
+   * @return string value
    */
 
 
   _createClass(StylerControlNumber, [{
+    key: "convertValue",
+    value: function convertValue(value) {
+      return this.convertValueforValidUnit(value);
+    }
+    /**
+     * Get the template for this form control.
+     * 
+     * @return string
+     */
+
+  }, {
     key: "getControlTemplate",
     value: function getControlTemplate() {
       return "\n        <input type=\"number\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
@@ -1597,13 +1686,25 @@ var StylerControlRange = /*#__PURE__*/function (_StylerControl) {
     return _super.call(this);
   }
   /**
-   * Get the template for this form control.
+   * Convert value of the control.
    * 
-   * @return string
+   * @param  string value
+   * @return string value
    */
 
 
   _createClass(StylerControlRange, [{
+    key: "convertValue",
+    value: function convertValue(value) {
+      return this.convertValueforValidUnit(value);
+    }
+    /**
+     * Get the template for this form control.
+     * 
+     * @return string
+     */
+
+  }, {
     key: "getControlTemplate",
     value: function getControlTemplate() {
       return "\n        <input type=\"range\" name=\"".concat(this.name, "\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
@@ -1722,6 +1823,99 @@ var StylerControlSelect = /*#__PURE__*/function (_StylerControl) {
   }]);
 
   return StylerControlSelect;
+}(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
+
+/***/ }),
+
+/***/ "./src/js/StylerControlSpacing.js":
+/*!****************************************!*\
+  !*** ./src/js/StylerControlSpacing.js ***!
+  \****************************************/
+/*! exports provided: StylerControlSpacing */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerControlSpacing", function() { return StylerControlSpacing; });
+/* harmony import */ var _StylerControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StylerControl */ "./src/js/StylerControl.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+var StylerControlSpacing = /*#__PURE__*/function (_StylerControl) {
+  _inherits(StylerControlSpacing, _StylerControl);
+
+  var _super = _createSuper(StylerControlSpacing);
+
+  /**
+   * Construct the class.
+   * 
+   * @param
+   */
+  function StylerControlSpacing() {
+    _classCallCheck(this, StylerControlSpacing);
+
+    return _super.call(this);
+  }
+  /**
+   * Get the template for this form control.
+   * 
+   * @return string
+   */
+
+
+  _createClass(StylerControlSpacing, [{
+    key: "getControlTemplate",
+    value: function getControlTemplate() {
+      return "\n        <input type=\"range\" name=\"".concat(this.name, "-left\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        <input type=\"range\" name=\"").concat(this.name, "-right\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        <input type=\"range\" name=\"").concat(this.name, "-top\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        <input type=\"range\" name=\"").concat(this.name, "-bottom\" value=\"").concat(this.value, "\" class=\"sjs-form-control\"").concat(this.attributes, " />\n        ");
+    }
+    /**
+     * Set events on elements in the template.
+     * 
+     * @param  HTMLDivElement rootElement
+     * @return void
+     */
+
+  }, {
+    key: "setEvents",
+    value: function setEvents(rootElement) {
+      var _this = this;
+
+      var inputs = rootElement.querySelectorAll('.sjs-form-control');
+
+      var _loop = function _loop(i) {
+        var input = inputs[i];
+        input.addEventListener('input', function () {
+          _this.element.style[input.getAttribute('name')] = input.value + (_this.unit || '');
+        });
+      };
+
+      for (var i = 0; i < inputs.length; i++) {
+        _loop(i);
+      }
+    }
+  }]);
+
+  return StylerControlSpacing;
 }(_StylerControl__WEBPACK_IMPORTED_MODULE_0__["StylerControl"]);
 
 /***/ }),
@@ -2040,17 +2234,19 @@ var StylerJS = /*#__PURE__*/function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StylerPanel", function() { return StylerPanel; });
 /* harmony import */ var _allowed_properties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allowed-properties */ "./src/js/allowed-properties.js");
-/* harmony import */ var _StylerControlColorPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StylerControlColorPicker */ "./src/js/StylerControlColorPicker.js");
-/* harmony import */ var _StylerControlHeading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StylerControlHeading */ "./src/js/StylerControlHeading.js");
-/* harmony import */ var _StylerControlNumber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./StylerControlNumber */ "./src/js/StylerControlNumber.js");
-/* harmony import */ var _StylerControlSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./StylerControlSelect */ "./src/js/StylerControlSelect.js");
-/* harmony import */ var _StylerControlRange__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./StylerControlRange */ "./src/js/StylerControlRange.js");
-/* harmony import */ var _StylerControlText__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./StylerControlText */ "./src/js/StylerControlText.js");
+/* harmony import */ var _StylerControlColorPicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StylerControlColorPicker */ "./src/js/StylerControlColorPicker.js");
+/* harmony import */ var _StylerControlHeading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StylerControlHeading */ "./src/js/StylerControlHeading.js");
+/* harmony import */ var _StylerControlNumber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StylerControlNumber */ "./src/js/StylerControlNumber.js");
+/* harmony import */ var _StylerControlSelect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./StylerControlSelect */ "./src/js/StylerControlSelect.js");
+/* harmony import */ var _StylerControlSpacing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./StylerControlSpacing */ "./src/js/StylerControlSpacing.js");
+/* harmony import */ var _StylerControlRange__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./StylerControlRange */ "./src/js/StylerControlRange.js");
+/* harmony import */ var _StylerControlText__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./StylerControlText */ "./src/js/StylerControlText.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -2104,7 +2300,7 @@ var StylerPanel = /*#__PURE__*/function () {
       }); // loop through all allowed groups and properties
 
       for (var groupKey in _allowed_properties__WEBPACK_IMPORTED_MODULE_0__["default"]) {
-        var group = new _StylerControlHeading__WEBPACK_IMPORTED_MODULE_3__["StylerControlHeading"]();
+        var group = new _StylerControlHeading__WEBPACK_IMPORTED_MODULE_2__["StylerControlHeading"]();
         group.setPanel(panel);
         group.setLabel(groupKey);
         group.build();
@@ -2116,23 +2312,27 @@ var StylerPanel = /*#__PURE__*/function () {
 
           switch (property.type) {
             case 'input-text':
-              control = new _StylerControlText__WEBPACK_IMPORTED_MODULE_6__["StylerControlText"]();
+              control = new _StylerControlText__WEBPACK_IMPORTED_MODULE_7__["StylerControlText"]();
               break;
 
             case 'color-picker':
-              control = new _StylerControlColorPicker__WEBPACK_IMPORTED_MODULE_2__["StylerControlColorPicker"]();
+              control = new _StylerControlColorPicker__WEBPACK_IMPORTED_MODULE_1__["StylerControlColorPicker"]();
               break;
 
             case 'input-number':
-              control = new _StylerControlNumber__WEBPACK_IMPORTED_MODULE_4__["StylerControlNumber"]();
+              control = new _StylerControlNumber__WEBPACK_IMPORTED_MODULE_3__["StylerControlNumber"]();
+              break;
+
+            case 'input-spacing':
+              control = new _StylerControlSpacing__WEBPACK_IMPORTED_MODULE_5__["StylerControlSpacing"]();
               break;
 
             case 'input-range':
-              control = new _StylerControlRange__WEBPACK_IMPORTED_MODULE_5__["StylerControlRange"]();
+              control = new _StylerControlRange__WEBPACK_IMPORTED_MODULE_6__["StylerControlRange"]();
               break;
 
             case 'select':
-              control = new _StylerControlSelect__WEBPACK_IMPORTED_MODULE_7__["StylerControlSelect"]();
+              control = new _StylerControlSelect__WEBPACK_IMPORTED_MODULE_4__["StylerControlSelect"]();
               break;
           }
 
@@ -2141,6 +2341,7 @@ var StylerPanel = /*#__PURE__*/function () {
             var value = this.propertyValue(element, propertyKey, property);
             console.log(propertyKey + ': ' + value);
             control.setElement(element);
+            control.setProperty(property);
             control.setLabel(property.label);
             control.setName(propertyKey);
             control.setValue(value || '');
@@ -2175,13 +2376,7 @@ var StylerPanel = /*#__PURE__*/function () {
         value = style[property.javascript] || property["default"];
       } // check the stylesheets???
       //.....
-      // strip all available units
 
-
-      if (value && property.unit) {
-        // value = value.replace(property.unit, '')
-        value = value.replace(/(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax)/g, '');
-      }
 
       return value;
     }
@@ -2251,7 +2446,7 @@ __webpack_require__.r(__webpack_exports__);
     'padding': {
       label: 'Padding',
       javascript: 'padding',
-      type: 'input-range',
+      type: 'input-spacing',
       unit: 'rem',
       "default": 0,
       attributes: {
@@ -2264,7 +2459,7 @@ __webpack_require__.r(__webpack_exports__);
     'margin': {
       label: 'Margin',
       javascript: 'margin',
-      type: 'input-range',
+      type: 'input-spacing',
       unit: 'rem',
       "default": 0,
       attributes: {
@@ -2273,31 +2468,31 @@ __webpack_require__.r(__webpack_exports__);
         step: 0.125
       },
       version: 'css1'
-    },
-    'width': {
-      label: 'Width',
-      javascript: 'width',
-      type: 'input-number',
-      unit: 'rem',
-      "default": 0,
-      attributes: {
-        min: 0,
-        step: 0.125
-      },
-      version: 'css1'
-    },
-    'height': {
-      label: 'Height',
-      javascript: 'height',
-      type: 'input-number',
-      unit: 'rem',
-      "default": 0,
-      attributes: {
-        min: 0,
-        step: 0.125
-      },
-      version: 'css1'
-    }
+    } // 'width': {
+    //     label: 'Width',
+    //     javascript: 'width',
+    //     type: 'input-number',
+    //     unit: 'rem',
+    //     default: 0,
+    //     attributes: {
+    //         min: 0,
+    //         step: 0.125,
+    //     },
+    //     version: 'css1'
+    // },
+    // 'height': {
+    //     label: 'Height',
+    //     javascript: 'height',
+    //     type: 'input-number',
+    //     unit: 'rem',
+    //     default: 0,
+    //     attributes: {
+    //         min: 0,
+    //         step: 0.125,
+    //     },
+    //     version: 'css1'
+    // },
+
   },
   'Typography': {
     'color': {

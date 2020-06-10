@@ -6,11 +6,13 @@ export class StylerControl
      * @param
      */
     constructor() {
+        this.element = undefined;
+        this.property = undefined;
         this.label = 'My Label';
         this.name = '';
         this.value = '';
         this.attributes = '';
-        this.date = [];
+        this.data = [];
     }
 
     /**
@@ -21,6 +23,16 @@ export class StylerControl
      */
     setElement(element) {
         this.element = element
+    }
+
+    /**
+     * Set property.
+     * 
+     * @param  object property
+     * @return void
+     */
+    setProperty(property) {
+        this.property = property
     }
 
     /**
@@ -50,7 +62,38 @@ export class StylerControl
      * @return void
      */
     setValue(value) {
-        this.value = value
+        this.value = this.convertValue(value)
+    }
+
+    /**
+     * Convert value of the control.
+     * This method will be extended.
+     * 
+     * @param  string value
+     * @return string value
+     */
+    convertValue(value) {
+        return value
+    }
+
+    /**
+     * Convert value of the control.
+     * This method will be extended.
+     * 
+     * @param  string value
+     * @return string value
+     */
+    convertValueforValidUnit(value) {
+        if (value && this.property && this.property.unit) {
+            value = value.replace(/(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax)/g, '')
+            switch (this.property.unit) {
+                case 'rem':
+                    value = value / 16
+                break;
+            }
+        }
+
+        return value
     }
 
     /**

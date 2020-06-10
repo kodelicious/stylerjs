@@ -3,6 +3,7 @@ import { StylerControlColorPicker } from './StylerControlColorPicker'
 import { StylerControlHeading } from './StylerControlHeading'
 import { StylerControlNumber } from './StylerControlNumber'
 import { StylerControlSelect } from './StylerControlSelect'
+import { StylerControlSpacing } from './StylerControlSpacing'
 import { StylerControlRange } from './StylerControlRange'
 import { StylerControlText } from './StylerControlText'
 
@@ -66,6 +67,9 @@ export class StylerPanel
                     case 'input-number': 
                         control = new StylerControlNumber
                     break;
+                    case 'input-spacing': 
+                        control = new StylerControlSpacing
+                    break;
                     case 'input-range': 
                         control = new StylerControlRange
                     break;
@@ -80,6 +84,7 @@ export class StylerPanel
                     console.log(propertyKey+': '+value);
                     
                     control.setElement(element)
+                    control.setProperty(property)
                     control.setLabel(property.label)
                     control.setName(propertyKey)
                     control.setValue(value || '')
@@ -115,12 +120,6 @@ export class StylerPanel
 
         // check the stylesheets???
         //.....
-
-        // strip all available units
-        if (value && property.unit) {
-            // value = value.replace(property.unit, '')
-            value = value.replace(/(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax)/g, '')
-        }
 
         return value
     }

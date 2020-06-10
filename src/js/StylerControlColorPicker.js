@@ -13,6 +13,31 @@ export class StylerControlColorPicker extends StylerControl
     }
 
     /**
+     * Convert value of the control.
+     * 
+     * @param  string value
+     * @return string value
+     */
+    convertValue(value) {
+        return value
+        return this.convertRGBAToHexA(value)
+    }
+
+    /**
+     * Convert RGBA to HEXA.
+     * 
+     * @param  string value
+     * @return string
+     */
+    convertRGBAToHexA(value) {
+        const rgb = value.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i)
+        return  (rgb && rgb.length === 4) ? "#" +
+                ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : ''
+    }
+
+    /**
      * Get the template for this form control.
      * 
      * @return string
@@ -41,8 +66,9 @@ export class StylerControlColorPicker extends StylerControl
             color: this.value,
             popup: 'left',
             onChange: (color) => {
-                this.element.style[this.name] = color.rgbaString
-                rootElement.querySelector('.sjs-form-control-text').innerHTML = color.rgbaString
+                const hex = color.hex.substr(0, 7)
+                this.element.style[this.name] = hex
+                rootElement.querySelector('.sjs-form-control-text').innerHTML = hex
             },
         })
     }
